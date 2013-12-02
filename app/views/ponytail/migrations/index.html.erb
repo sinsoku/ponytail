@@ -1,0 +1,13 @@
+<% @migrations.each do |migration| %>
+  <%= render 'migration', migration: migration, current: @current_version %>
+<% end %>
+
+<div class="pt_actions">
+  <%= button_to 'New', new_migration_path, class: 'pt_new', method: :get %>
+  <%= button_to 'Migrate', migrate_migrations_path, class: 'pt_migrate' %>
+  <%= button_to 'Rollback', rollback_migrations_path, class: 'pt_rallback' %>
+</div>
+
+<script type='text/javascript'>
+  setupMigrations();
+</script>

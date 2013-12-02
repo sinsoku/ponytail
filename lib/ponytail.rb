@@ -1,5 +1,2 @@
-require "ponytail/version"
-
-module Ponytail
-  # Your code goes here...
-end
+require 'ponytail/engine'
+require 'ponytail/migration'

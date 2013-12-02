@@ -1,0 +1,10 @@
+<%= form_for @migration, url: migrations_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <div class="pt_raw_content">
+    <%= f.text_area :raw_content, size: '80x20' %>
+  </div>
+
+  <%= f.submit 'Submit' %>
+<% end %>
