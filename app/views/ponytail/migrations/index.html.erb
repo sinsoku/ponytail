@@ -1,3 +1,5 @@
+<%= render 'notice' %>
+
 <% @migrations.each do |migration| %>
   <%= render 'migration', migration: migration, current: @current_version %>
 <% end %>

@@ -1,3 +1,5 @@
+<%= render 'notice' %>
+
 <%= form_for @migration, url: migrations_path do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
