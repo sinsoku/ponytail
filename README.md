@@ -1,6 +1,6 @@
 # Ponytail
 
-TODO: Write a gem description
+Ponytail is a Rails engine that shows the migrations.
 
 ## Installation
 
