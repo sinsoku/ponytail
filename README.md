@@ -1,6 +1,7 @@
 # Ponytail
 
 [![Build Status](https://travis-ci.org/sinsoku/ponytail.png?branch=develop)](https://travis-ci.org/sinsoku/ponytail)
+[![Coverage Status](https://coveralls.io/repos/sinsoku/ponytail/badge.png?branch=develop)](https://coveralls.io/r/sinsoku/ponytail?branch=develop)
 
 Ponytail is a Rails engine that shows the migrations.
 
