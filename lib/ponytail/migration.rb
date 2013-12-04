@@ -4,6 +4,10 @@ module Ponytail
     attr_accessor :name, :filename, :version, :raw_content
 
     class << self
+      def check_pending?
+        Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
+      end
+
       def all
         proxys = ActiveRecord::Migrator.migrations(migrations_paths)
         proxys.map { |p| new(name: p.name, filename: p.filename, version: p.version) }

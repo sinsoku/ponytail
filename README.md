@@ -1,24 +1,35 @@
 # Ponytail
 
+[![Build Status](https://travis-ci.org/sinsoku/ponytail.png?branch=develop)](https://travis-ci.org/sinsoku/ponytail)
+
 Ponytail is a Rails engine that shows the migrations.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add `ponytail` to `:development` groups in your application's Gemfile:
 
-    gem 'ponytail'
+```ruby
+group :development do
+  gem 'ponytail'
+end
+```
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
-Or install it yourself as:
+Comment out `config.active_record.migration_error` in `config/environments/development.rb`.
 
-    $ gem install ponytail
+```ruby
+  # Raise an error on page load if there are pending migrations
+  # config.active_record.migration_error = :page_load
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Visit `/rails/migrations` in your app.
 
 ## Contributing
 
