@@ -1,6 +1,11 @@
 if ENV["TRAVIS"]
+  require 'simplecov'
   require 'coveralls'
-  Coveralls.wear! do
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
+  SimpleCov.start do
     add_group 'Lib', 'lib'
 
     add_filter 'spec'
