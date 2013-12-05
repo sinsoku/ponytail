@@ -5,7 +5,7 @@ module Ponytail
 
     class << self
       def check_pending?
-        Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
+        ActiveRecord::VERSION::MAJOR >= 4 && Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
       end
 
       def all
