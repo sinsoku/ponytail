@@ -34,8 +34,9 @@ module Ponytail
 
     def save
       if valid?
-        next_migration_filename = "#{Migration.migrations_path}/#{Migration.next_version}_#{name.underscore}.rb"
-        open(next_migration_filename, 'w').write(raw_content)
+        next_filename = "#{Migration.migrations_path}/#{Migration.next_version}_#{name.underscore}.rb"
+        open(next_filename, 'w').write(raw_content)
+        true
       else
         false
       end

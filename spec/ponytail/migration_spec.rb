@@ -17,5 +17,27 @@ module Ponytail
       its(:filename) { should eq '001_create_users.rb' }
       its(:version) { should eq 1 }
     end
+
+    describe "#save" do
+      context "migration is valid" do
+        before do
+          Migration.stub(migrations_path: 'db/migrate', next_version: '001')
+          @migration = Migration.new(name: 'CreateBooks')
+          @migration.stub(valid?: true)
+          @migration.stub_chain(:open, :write)
+          @migration.should_receive(:open).with('db/migrate/001_create_books.rb', 'w')
+        end
+        subject { @migration.save }
+        it { should be_true }
+      end
+      context "migration is invalid" do
+        before do
+          @migration = Migration.new(name: 'CreateBooks')
+          @migration.stub(valid?: false)
+        end
+        subject { @migration.save }
+        it { should be_false }
+      end
+    end
   end
 end
