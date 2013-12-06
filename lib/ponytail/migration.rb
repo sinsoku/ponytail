@@ -5,7 +5,7 @@ module Ponytail
 
     class << self
       def check_pending?
-        Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
+        ActiveRecord::VERSION::MAJOR >= 4 && Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
       end
 
       def all
@@ -34,8 +34,9 @@ module Ponytail
 
     def save
       if valid?
-        next_migration_filename = "#{Migration.migrations_path}/#{Migration.next_version}_#{name.underscore}.rb"
-        open(next_migration_filename, 'w').write(raw_content)
+        next_filename = "#{Migration.migrations_path}/#{Migration.next_version}_#{name.underscore}.rb"
+        open(next_filename, 'w').write(raw_content)
+        true
       else
         false
       end
