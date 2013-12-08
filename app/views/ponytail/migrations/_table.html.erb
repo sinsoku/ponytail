@@ -1,0 +1,7 @@
+<div class="pt_table"><%= table.name %></div>
+<div>
+  <% table.columns.each do |column| %>
+    <span>t.<%= column.type %></span>
+    <span><%= column.name %></span>
+<% end %>
+</div>

@@ -9,6 +9,7 @@ module Ponytail
 
     def new
       @migration = Migration.new
+      @schema = Schema.new
     end
 
     def create

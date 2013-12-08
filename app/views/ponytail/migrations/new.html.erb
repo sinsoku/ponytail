@@ -10,3 +10,7 @@
 
   <%= f.submit 'Submit' %>
 <% end %>
+
+<% @schema.tables.each do |t| %>
+  <%= render 'table', table: t %>
+<% end %>
