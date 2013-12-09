@@ -1,5 +1,6 @@
 # Ponytail
 
+[![Gem Version](https://badge.fury.io/rb/ponytail.png)](http://badge.fury.io/rb/ponytail)
 [![Build Status](https://travis-ci.org/sinsoku/ponytail.png?branch=develop)](https://travis-ci.org/sinsoku/ponytail)
 [![Coverage Status](https://coveralls.io/repos/sinsoku/ponytail/badge.png?branch=develop)](https://coveralls.io/r/sinsoku/ponytail?branch=develop)
 
