@@ -1,6 +1,6 @@
-<%= render 'notice' %>
-
 <%= form_for @migration, url: migrations_path do |f| %>
+  <%= render 'new_errors', migration: @migration %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
 
@@ -9,4 +9,10 @@
   </div>
 
   <%= f.submit 'Submit' %>
+<% end %>
+
+<%= button_to 'Cancel', migrations_path, method: :get %>
+
+<% @schema.tables.each do |t| %>
+  <%= render 'table', table: t %>
 <% end %>

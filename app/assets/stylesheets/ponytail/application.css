@@ -1,3 +1,11 @@
+/* index */
+.pt_index {
+  display: -moz-box;
+  display: -webkit-box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+}
+
 .pt_actions {
   margin: 5px;
 }
@@ -7,6 +15,7 @@
   margin: 0 2px;
 }
 
+/* migration */
 .pt_migration .pt_name {
   font-size: large;
   font-weight: bold;
@@ -14,4 +23,25 @@
 
 .pt_migration .pt_raw_content {
   display: none;
+}
+
+/* notice */
+.pt_notice {
+  display: -moz-box;
+  display: -webkit-box;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background: limegreen;
+  color: white;
+}
+
+.pt_notice_message {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+}
+
+/* errors */
+.pt_new_errors ul {
+  margin: 3px 0;
 }
