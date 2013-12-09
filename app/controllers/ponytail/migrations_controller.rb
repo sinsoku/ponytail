@@ -9,6 +9,7 @@ module Ponytail
 
     def new
       @migration = Migration.new
+      @schema = Schema.new
     end
 
     def create
@@ -17,7 +18,8 @@ module Ponytail
       if @migration.save
         redirect_to :migrations, notice: 'Migration was successfully created.'
       else
-        render action: 'new'
+        @schema = Schema.new
+        render action: :new
       end
     end
 

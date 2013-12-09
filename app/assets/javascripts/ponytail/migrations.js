@@ -11,10 +11,22 @@ function onClick(elems, func) {
   });
 }
 
-function setupMigrations() {
+function toggleMigrationRawContent() {
   var elems = document.querySelectorAll(".pt_migration .pt_header");
   onClick(elems, function() {
     var content = this.nextElementSibling;
     content.style.display = content.style.display === "" ? "block" : "";
   });
+}
+
+function closeNotice() {
+  var elems = document.querySelectorAll(".pt_close_notice");
+  onClick(elems, function() {
+    this.parentElement.style.display = "none";
+  });
+}
+
+function setupMigrations() {
+  toggleMigrationRawContent();
+  closeNotice();
 }
