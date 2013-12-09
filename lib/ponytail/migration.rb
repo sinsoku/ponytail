@@ -3,6 +3,9 @@ module Ponytail
     include ActiveModel::Model
     attr_accessor :name, :filename, :version, :raw_content
 
+    validates :name, presence: true
+    validates :raw_content, presence: true
+
     class << self
       def check_pending?
         ActiveRecord::VERSION::MAJOR >= 4 && Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)

@@ -40,3 +40,8 @@
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
 }
+
+/* errors */
+.pt_new_errors ul {
+  margin: 3px 0;
+}
