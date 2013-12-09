@@ -4,4 +4,4 @@ load "jasmine/tasks/jasmine.rake"
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task :default => [:spec, 'jasmine:ci']
