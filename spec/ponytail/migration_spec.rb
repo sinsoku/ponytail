@@ -11,6 +11,34 @@ module Ponytail
       its(:first) { should be_a_kind_of Migration }
     end
 
+    describe ".migrate" do
+      before do
+        Migration.stub(:migrations_paths)
+        ActiveRecord::Migrator.should_receive(:migrate)
+        Migration.migrate
+      end
+      it "" do end
+    end
+
+    describe ".rollback" do
+      before do
+        Migration.stub(:migrations_paths)
+        ActiveRecord::Migrator.should_receive(:rollback)
+        Migration.rollback
+      end
+      it "" do end
+    end
+
+    describe ".next_version" do
+      before do
+        migration = Migration.new(version: 1)
+        Migration.stub(all: [migration])
+        ActiveRecord::Migration.should_receive(:next_migration_number)
+        Migration.next_version
+      end
+      it "" do end
+    end
+
     describe "#initialize" do
       subject { Migration.new(name: 'CreateUsers', filename: '001_create_users.rb', version: 1) }
       its(:name) { should eq 'CreateUsers' }
