@@ -7,12 +7,16 @@ module Ponytail
 
   class Table
     attr_reader :name
-    def initialize(name)
+    def initialize(name=nil)
       @name = name
     end
 
     def columns
       @columns ||= ActiveRecord::Base.connection.columns(name)
+    end
+
+    def ==(other)
+      name == other.name
     end
   end
 end
