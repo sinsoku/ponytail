@@ -6,9 +6,9 @@
   <% end %>
 
   <div class="pt_actions">
-    <%= button_to 'New', new_migration_path, class: 'pt_new', method: :get, disabled: Ponytail::Migration.check_pending? %>
-    <%= button_to 'Migrate', migrate_migrations_path, class: 'pt_migrate', disabled: Ponytail::Migration.check_pending? %>
-    <%= button_to 'Rollback', rollback_migrations_path, class: 'pt_rallback', disabled: Ponytail::Migration.check_pending? %>
+    <%= button_to 'New', new_migration_path, method: :get, disabled: Ponytail::Migration.check_pending? %>
+    <%= button_to 'Migrate', migrate_migrations_path, disabled: Ponytail::Migration.check_pending? %>
+    <%= button_to 'Rollback', rollback_migrations_path, disabled: Ponytail::Migration.check_pending? %>
   </div>
 </div>
 
