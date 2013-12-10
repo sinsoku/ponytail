@@ -16,13 +16,33 @@
 }
 
 /* migration */
+.pt_migration {
+  display: -moz-box;
+  display: -webkit-box;
+}
+
+.pt_migration .pt_current {
+  width: 60px;
+}
+
+.pt_migration .pt_migration_file {
+  margin-left: 5px;
+}
+
 .pt_migration .pt_name {
   font-size: large;
   font-weight: bold;
 }
 
 .pt_migration .pt_raw_content {
+  background: whitesmoke;
+  border-radius: 5px;
   display: none;
+  padding: 5px;
+}
+
+.pt_migration .pt_raw_content pre {
+  margin: 5px 0;
 }
 
 /* notice */

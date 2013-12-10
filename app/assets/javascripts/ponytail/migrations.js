@@ -12,7 +12,7 @@ function onClick(elems, func) {
 }
 
 function toggleMigrationRawContent() {
-  var elems = document.querySelectorAll(".pt_migration .pt_header");
+  var elems = document.querySelectorAll(".pt_migration .pt_migration_header");
   onClick(elems, function() {
     var content = this.nextElementSibling;
     content.style.display = content.style.display === "" ? "block" : "";
