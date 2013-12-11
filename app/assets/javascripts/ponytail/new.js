@@ -52,9 +52,19 @@ function inputNewTableName() {
   };
 }
 
+function clickSubmitButton() {
+  var elem = document.querySelectorAll(".pt_submit")[0];
+  console.log(elem);
+  elem.onclick = function() {
+    var text_area = document.querySelectorAll(".pt_raw_content textarea")[0];
+    text_area.disabled = false;
+  };
+}
+
 function setupNewMigration() {
   toggleEditRawContent();
   inputClassName();
   clickNewTable();
   inputNewTableName();
+  clickSubmitButton();
 }
