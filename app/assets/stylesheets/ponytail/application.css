@@ -84,6 +84,15 @@
   margin-top: 5px;
 }
 
+.pt_new .pt_schema .pt_new_table {
+  margin-top: 5px;
+}
+
+.pt_new .pt_schema .pt_new_table_form {
+  display: none;
+  margin-top: 5px;
+}
+
 .pt_new .pt_columns {
   display: -moz-box;
   display: -webkit-box;
