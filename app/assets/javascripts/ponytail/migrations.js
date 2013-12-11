@@ -75,11 +75,24 @@ CreateTable.prototype.toString = function() {
          "end"].join("\n");
 };
 
+function getMigrationClassName() {
+  var elem = document.querySelectorAll(".pt_class_name input")[0];
+  return elem.value;
+}
+
+function getNewTableName() {
+  var elem = document.querySelectorAll(".pt_new_class_name input")[0];
+  return elem.value;
+}
+
 function inputClassName() {
   var elems = document.querySelectorAll(".pt_class_name input");
   elems[0].onkeyup = function() {
     var file = new MigrationFile();
     file.setClassName(this.value);
+    var command = new CreateTable();
+    command.setTableName(getNewTableName());
+    file.addCommand(command);
     var area = document.querySelectorAll(".pt_raw_content textarea")[0];
     area.value = file.toString();
   };
@@ -97,9 +110,10 @@ function clickNewTable() {
 function inputNewTableName() {
   var elem = document.querySelectorAll(".pt_new_class_name input")[0];
   elem.onkeyup = function() {
+    var file = new MigrationFile();
+    file.setClassName(getMigrationClassName());
     var command = new CreateTable();
     command.setTableName(this.value);
-    var file = new MigrationFile();
     file.addCommand(command);
     var area = document.querySelectorAll(".pt_raw_content textarea")[0];
     area.value = file.toString();
