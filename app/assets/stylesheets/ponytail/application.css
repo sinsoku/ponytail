@@ -84,6 +84,15 @@
   margin-top: 5px;
 }
 
+.pt_new .pt_schema .pt_new_table {
+  margin-top: 5px;
+}
+
+.pt_new .pt_schema .pt_new_table_form {
+  display: none;
+  margin-top: 5px;
+}
+
 .pt_new .pt_columns {
   display: -moz-box;
   display: -webkit-box;
@@ -103,5 +112,13 @@
   width: 100px;
 }
 
-.pt_new .pt_columns .pt_column .pt_column_name {
+.pt_new .pt_form_header {
+  display: -moz-box;
+  display: -webkit-box;
+  width: 100%;
+}
+
+.pt_new .pt_form_header .pt_class_name {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
 }
