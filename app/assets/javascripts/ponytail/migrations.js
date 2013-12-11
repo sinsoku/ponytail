@@ -59,7 +59,7 @@ MigrationFile.prototype.addCommand = function(command) {
 MigrationFile.prototype.toStringOfCommands = function() {
   return this.commands.map(function(command) {
     return command.toString();
-  }).join("\n").replace(/^/, "    ").replace("\n", "\n    ");
+  }).join("\n").replace(/^/, "    ").replace(/\n/g, "\n    ");
 };
 
 function CreateTable() {
@@ -72,6 +72,7 @@ CreateTable.prototype.setTableName = function(tableName) {
 
 CreateTable.prototype.toString = function() {
   return ["create_table :" + this.tableName + " do |t|",
+         "  t.timestamps",
          "end"].join("\n");
 };
 
