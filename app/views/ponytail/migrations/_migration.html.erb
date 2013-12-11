@@ -1,10 +1,12 @@
 <div class="pt_migration">
-  <div class="pt_header">
-    <% if migration.version == @current_version %>
-      <span class="pt_current">current</span>
-    <% end %>
-    <span class="pt_name"><%= migration.name %></span>
-    <span class="pt_filename"><%= migration.filename %></span>
+  <div class="pt_current"><%= migration.version == @current_version ? "current" : "" %></div>
+  <div class="pt_migration_file">
+    <div class="pt_migration_header">
+      <span class="pt_name"><%= migration.name %></span>
+      <span class="pt_filename"><%= migration.filename %></span>
+    </div>
+    <div class="pt_raw_content">
+      <pre><%= migration.raw_content %></pre>
+    </div>
   </div>
-  <pre class="pt_raw_content"><%= migration.raw_content %></pre>
 </div>

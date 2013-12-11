@@ -1,7 +1,12 @@
 module Ponytail
   class Schema
     def tables
-      ActiveRecord::Base.connection.tables.sort.map { |t| Table.new(t) }
+      table_names.sort.map { |t| Table.new(t) }
+    end
+
+    private
+    def table_names
+      ActiveRecord::Base.connection.tables.delete_if { |t| t == 'schema_migrations' }
     end
   end
 
