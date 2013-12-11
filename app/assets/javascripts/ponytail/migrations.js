@@ -26,10 +26,20 @@ function closeNotice() {
   });
 }
 
+function toggleEditRawContent() {
+  var elems = document.querySelectorAll(".pt_checkbox");
+  onClick(elems, function() {
+    var raw_content = document.querySelectorAll(".pt_raw_content");
+    var text_area = raw_content[0].children[0];
+    text_area.disabled = !(text_area.disabled);
+  });
+}
+
 function setupMigrations() {
   toggleMigrationRawContent();
   closeNotice();
 }
 
 function setupNewMigration() {
+  toggleEditRawContent();
 }
