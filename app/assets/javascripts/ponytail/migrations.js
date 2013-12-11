@@ -36,6 +36,8 @@ function toggleEditRawContent() {
 }
 
 function MigrationFile() {
+  this.className = "";
+  this.commands = [];
 }
 
 MigrationFile.prototype.setClassName = function(className) {
@@ -45,15 +47,60 @@ MigrationFile.prototype.setClassName = function(className) {
 MigrationFile.prototype.toString = function() {
   return ["class " + this.className + " < ActiveRecord::Migration",
          "  def change",
+         this.toStringOfCommands(),
          "  end",
+         "end"].join("\n");
+};
+
+MigrationFile.prototype.addCommand = function(command) {
+  this.commands.push(command);
+};
+
+MigrationFile.prototype.toStringOfCommands = function() {
+  return this.commands.map(function(command) {
+    return command.toString();
+  }).join("\n").replace(/^/, "    ").replace("\n", "\n    ");
+};
+
+function CreateTable() {
+  this.tableName = "";
+}
+
+CreateTable.prototype.setTableName = function(tableName) {
+  this.tableName = tableName;
+};
+
+CreateTable.prototype.toString = function() {
+  return ["create_table :" + this.tableName + " do |t|",
          "end"].join("\n");
 };
 
 function inputClassName() {
   var elems = document.querySelectorAll(".pt_class_name input");
-  var file = new MigrationFile();
   elems[0].onkeyup = function() {
+    var file = new MigrationFile();
     file.setClassName(this.value);
+    var area = document.querySelectorAll(".pt_raw_content textarea")[0];
+    area.value = file.toString();
+  };
+}
+
+function clickNewTable() {
+  var elem = document.querySelectorAll(".pt_new_table")[0];
+  elem.onclick = function() {
+    this.style.display = "none";
+    var form = document.querySelectorAll(".pt_new_table_form")[0];
+    form.style.display = "block";
+  };
+}
+
+function inputNewTableName() {
+  var elem = document.querySelectorAll(".pt_new_class_name input")[0];
+  elem.onkeyup = function() {
+    var command = new CreateTable();
+    command.setTableName(this.value);
+    var file = new MigrationFile();
+    file.addCommand(command);
     var area = document.querySelectorAll(".pt_raw_content textarea")[0];
     area.value = file.toString();
   };
@@ -67,4 +114,6 @@ function setupMigrations() {
 function setupNewMigration() {
   toggleEditRawContent();
   inputClassName();
+  clickNewTable();
+  inputNewTableName();
 }

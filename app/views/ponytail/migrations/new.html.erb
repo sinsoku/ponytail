@@ -3,6 +3,15 @@
     <% @schema.tables.each do |t| %>
       <%= render 'table', table: t %>
     <% end %>
+
+    <div class="pt_new_table">
+      <a href="#">New Table</a>
+    </div>
+    <div class="pt_new_table_form">
+      <div class="pt_new_class_name">
+        <input type="text" />
+      </div>
+    </div>
   </div>
 
   <div>
