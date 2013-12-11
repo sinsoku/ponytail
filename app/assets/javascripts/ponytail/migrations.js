@@ -35,6 +35,30 @@ function toggleEditRawContent() {
   });
 }
 
+function MigrationFile() {
+}
+
+MigrationFile.prototype.setClassName = function(className) {
+  this.className = className;
+};
+
+MigrationFile.prototype.toString = function() {
+  return ["class " + this.className + " < ActiveRecord::Migration",
+         "  def change",
+         "  end",
+         "end"].join("\n");
+};
+
+function inputClassName() {
+  var elems = document.querySelectorAll(".pt_class_name input");
+  var file = new MigrationFile();
+  elems[0].onkeyup = function() {
+    file.setClassName(this.value);
+    var area = document.querySelectorAll(".pt_raw_content textarea")[0];
+    area.value = file.toString();
+  };
+}
+
 function setupMigrations() {
   toggleMigrationRawContent();
   closeNotice();
@@ -42,4 +66,5 @@ function setupMigrations() {
 
 function setupNewMigration() {
   toggleEditRawContent();
+  inputClassName();
 }
