@@ -1,18 +1,28 @@
-<%= form_for @migration, url: migrations_path do |f| %>
-  <%= render 'new_errors', migration: @migration %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <div class="pt_raw_content">
-    <%= f.text_area :raw_content, size: '80x20' %>
+<div class="pt_new">
+  <div class="pt_schema">
+    <% @schema.tables.each do |t| %>
+      <%= render 'table', table: t %>
+    <% end %>
   </div>
 
-  <%= f.submit 'Submit' %>
-<% end %>
+  <div>
+    <%= form_for @migration, url: migrations_path do |f| %>
+      <%= render 'new_errors', migration: @migration %>
 
-<%= button_to 'Cancel', migrations_path, method: :get %>
+      <span>Class Name</span>
+      <%= f.text_field :name %>
 
-<% @schema.tables.each do |t| %>
-  <%= render 'table', table: t %>
-<% end %>
+      <div class="pt_raw_content">
+        <%= f.text_area :raw_content, size: '60x20' %>
+      </div>
+
+      <%= f.submit 'Update' %>
+    <% end %>
+
+    <%= button_to 'Cancel', migrations_path, method: :get %>
+  </div>
+</div>
+
+<script type='text/javascript'>
+  setupNewMigration();
+</script>
