@@ -1,7 +1,9 @@
 <div class="pt_table"><%= table.name %></div>
-<div>
+<div class="pt_columns">
   <% table.columns.each do |column| %>
-    <span>t.<%= column.type %></span>
-    <span><%= column.name %></span>
+    <div class="pt_column">
+      <div class="pt_column_type">t.<%= column.type %></div>
+      <div class="pt_column_name"><%= column.name %></div>
+    </div>
 <% end %>
 </div>

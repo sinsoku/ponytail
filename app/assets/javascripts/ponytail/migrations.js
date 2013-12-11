@@ -30,3 +30,6 @@ function setupMigrations() {
   toggleMigrationRawContent();
   closeNotice();
 }
+
+function setupNewMigration() {
+}
