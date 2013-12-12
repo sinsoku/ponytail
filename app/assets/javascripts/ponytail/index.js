@@ -10,15 +10,11 @@ function toggleMigrationRawContent() {
 }
 
 function closeNotice() {
-  var elem = document.querySelectorAll(".pt_close_notice")[0];
-  if (elem !== undefined) {
+  var elem = document.querySelector(".pt_close_notice");
+  if (elem !== null) {
     elem.onclick = function() {
       this.parentElement.style.display = "none";
+      return false;
     };
   }
-}
-
-function setupMigrations() {
-  toggleMigrationRawContent();
-  closeNotice();
 }
