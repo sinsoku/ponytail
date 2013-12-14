@@ -31,6 +31,10 @@ NewMigrationView.prototype = {
       var schema = document.querySelector(".pt_new .pt_schema");
       var newTable = document.querySelector(".pt_new .pt_new_table");
       var tableView = new TableView({});
+      tableView.addChangeListener(function() {
+        _this.updateMigrationFileView();
+      });
+      _this.tableViews.push(tableView);
       schema.insertBefore(tableView.toElement(), newTable);
       return false;
     };

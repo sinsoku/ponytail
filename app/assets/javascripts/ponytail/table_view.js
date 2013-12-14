@@ -4,13 +4,23 @@ function TableView(option) {
 }
 TableView.prototype = {
   init: function(option) {
+    var _this = this;
     this.element = option.element;
     if (this.element === undefined) {
-      this.element = document.createElement("div");
-      this.element.setAttribute("class", "pt_table");
-      this.element.innerHTML = '<div class="pt_table_name"><input type="text" /></div><div class="pt_columns"></div>';
+      this.element = this.createTable();
+      this.tableName = this.element.querySelector(".pt_table_name");
+      this.inputTableName = this.tableName.querySelector("input");
+      this.inputTableName.onblur = function() {
+        _this.tableName.innerHTML = this.value;
+        // fake it
+        _this.command = new CreateTable();
+        _this.command.setTableName(this.value);
+        _this.callbacks.forEach(function(func) {
+          func();
+        });
+      };
     }
-    this.columnElements = document.querySelectorAll(".pt_column");
+    this.columnElements = this.element.querySelectorAll(".pt_column");
     this.callbacks = [];
     this.command = null;
   },
@@ -27,5 +37,11 @@ TableView.prototype = {
   },
   toElement: function() {
     return this.element;
+  },
+  createTable: function() {
+    var elem = document.createElement("div");
+    elem.setAttribute("class", "pt_table");
+    elem.innerHTML = '<div class="pt_table_name"><input type="text" /></div><div class="pt_columns"></div>';
+    return elem;
   }
 };
