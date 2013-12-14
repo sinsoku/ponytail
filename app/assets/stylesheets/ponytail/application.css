@@ -79,17 +79,15 @@
 }
 
 .pt_new .pt_schema .pt_table {
+  margin-top: 5px;
+}
+
+.pt_new .pt_schema .pt_table_name {
   font-size: large;
   font-weight: bold;
-  margin-top: 5px;
 }
 
 .pt_new .pt_schema .pt_new_table {
-  margin-top: 5px;
-}
-
-.pt_new .pt_schema .pt_new_table_form {
-  display: none;
   margin-top: 5px;
 }
 
