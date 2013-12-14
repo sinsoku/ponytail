@@ -14,7 +14,6 @@ TableView.prototype = {
     this.tableNameElement = this.element.querySelector(".pt_table_name");
     this.tableNameSpanElement = this.tableNameElement.querySelector("span");
     this.inputTableNameElement = this.tableNameElement.querySelector("input");
-    console.log(this.tableNameSpanElement);
     this.tableNameSpanElement.onclick = function() {
       _this.tableNameSpanElement.style.display = "none";
       _this.inputTableNameElement.style.display = "block";
