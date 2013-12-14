@@ -1,6 +1,7 @@
-function MigrationFileView(element) {
-  this.element = element;
+function MigrationFileView(option) {
+  this.element = option.element;
   this.callbacks = [];
+  this.init();
 }
 MigrationFileView.prototype = {
   init: function() {

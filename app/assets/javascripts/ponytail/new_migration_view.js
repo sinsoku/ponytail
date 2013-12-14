@@ -1,8 +1,9 @@
-function NewMigrationView(element) {
-  this.element = element;
+function NewMigrationView(option) {
+  this.element = option.element;
   this.tableViews = [];
   this.newTableLink = null;
   this.migrationFileView = null;
+  this.init();
 }
 NewMigrationView.prototype = {
   init: function() {
@@ -18,7 +19,7 @@ NewMigrationView.prototype = {
       _this.updateMigrationFileView();
     };
     for(var i=0; i<elems.length; i++) {
-      var tableView = new TableView(elems[i]).init();
+      var tableView = new TableView({element: elems[i]});
       tableView.addChangeListener(func);
       this.tableViews.push(tableView);
     }
@@ -40,7 +41,7 @@ NewMigrationView.prototype = {
   },
   initMigrationView: function() {
     var elem = document.querySelector("form.new_ponytail_migration");
-    this.migrationFileView = new MigrationFileView(elem).init();
+    this.migrationFileView = new MigrationFileView({element: elem});
     var _this = this;
     this.migrationFileView.addChangeListener(function() {
       _this.updateMigrationFileView();

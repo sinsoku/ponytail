@@ -1,6 +1,7 @@
-function TableView(element) {
-  this.element = element;
+function TableView(option) {
+  this.element = option.element;
   this.callbacks = [];
+  this.init();
 }
 TableView.prototype = {
   init: function() {
