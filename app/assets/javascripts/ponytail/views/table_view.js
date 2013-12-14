@@ -30,7 +30,7 @@ TableView.prototype = {
     this.columnElements = this.element.querySelectorAll(".pt_column");
     this.callbacks = [];
 
-    this.table = new Table({tableName: this.tableNameSpanElement.value, isSaved: isSaved});
+    this.table = new Table({tableName: this.tableNameSpanElement.innerHTML, isSaved: isSaved});
     for(var i=0; i<this.columnElements.length; i++) {
       var name = this.columnElements[i].querySelector(".pt_column_name");
       var type = this.columnElements[i].querySelector(".pt_column_type");
