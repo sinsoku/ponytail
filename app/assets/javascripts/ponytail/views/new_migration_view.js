@@ -25,18 +25,18 @@ NewMigrationView.prototype = {
     }
   },
   initNewTableLink: function() {
+    var _this = this;
     this.newTableLink = document.querySelector(".pt_new_table a");
     this.newTableLink.onclick = function() {
-      // TODO: append table view
-      this.style.display = "none";
-      var form = document.querySelector(".pt_new_table_form");
-      form.style.display = "block";
+      var schema = document.querySelector(".pt_new .pt_schema");
+      var newTable = document.querySelector(".pt_new .pt_new_table");
+      var tableView = new TableView({});
+      tableView.addChangeListener(function() {
+        _this.updateMigrationFileView();
+      });
+      _this.tableViews.push(tableView);
+      schema.insertBefore(tableView.toElement(), newTable);
       return false;
-    };
-    var _this = this;
-    this.newClassNameInput = document.querySelector(".pt_new_class_name input");
-    this.newClassNameInput.onkeyup = function() {
-      _this.updateMigrationFileView();
     };
   },
   initMigrationView: function() {
@@ -50,9 +50,11 @@ NewMigrationView.prototype = {
   updateMigrationFileView: function() {
     var file = new MigrationFile();
     file.setClassName(this.migrationFileView.getClassName());
-    var command = new CreateTable();
-    command.setTableName(this.newClassNameInput ? this.newClassNameInput.value : "");
-    file.addCommand(command);
+    this.tableViews.forEach(function(tableView) {
+      tableView.getCommands().forEach(function(command) {
+        file.addCommand(command);
+      });
+    });
     this.migrationFileView.setRawContent(file.toString());
   }
 };
