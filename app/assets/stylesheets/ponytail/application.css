@@ -82,7 +82,7 @@
   margin-top: 5px;
 }
 
-.pt_new .pt_schema .pt_table_name {
+.pt_new .pt_schema .pt_table_name span {
   font-size: large;
   font-weight: bold;
 }

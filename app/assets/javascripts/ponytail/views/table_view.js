@@ -28,6 +28,14 @@ TableView.prototype = {
       });
     };
     this.columnElements = this.element.querySelectorAll(".pt_column");
+    this.dropTableLink = this.element.querySelector("a.pt_drop_table");
+    this.dropTableLink.onclick = function() {
+      _this.table.drop();
+      _this.callbacks.forEach(function(func) {
+        func();
+      });
+      return false;
+    };
     this.callbacks = [];
 
     this.table = new Table({tableName: this.tableNameSpanElement.innerHTML, isSaved: isSaved});
@@ -54,7 +62,7 @@ TableView.prototype = {
   createTable: function() {
     var elem = document.createElement("div");
     elem.setAttribute("class", "pt_table");
-    elem.innerHTML = '<div class="pt_table_name"><span>tables</span><input type="text" /></div><div class="pt_columns"></div>';
+    elem.innerHTML = '<div class="pt_table_name"><span>tables</span><input type="text" /></div><a href="#" class="pt_drop_table">drop</a><div class="pt_columns"></div>';
     return elem;
   }
 };
