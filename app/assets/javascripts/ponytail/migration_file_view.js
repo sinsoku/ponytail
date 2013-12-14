@@ -1,10 +1,12 @@
-function MigrationFileView(element) {
-  this.element = element;
-  this.callbacks = [];
+function MigrationFileView(option) {
+  var init = option.init !== undefined ? option.init : true;
+  if (init) { this.init(option); }
 }
 MigrationFileView.prototype = {
-  init: function() {
+  init: function(option) {
     var _this = this;
+    this.element = option.element;
+    this.callbacks = [];
     this.checkBox = document.querySelector(".pt_checkbox");
     this.checkBox.onclick = function() {
       _this.toggleEditRawContent();
@@ -20,7 +22,6 @@ MigrationFileView.prototype = {
     this.submitButton.onclick = function() {
       _this.rawContentElement.disabled = false;
     };
-    return this;
   },
   toggleEditRawContent: function() {
     this.rawContentElement.disabled = !(this.rawContentElement.disabled);
