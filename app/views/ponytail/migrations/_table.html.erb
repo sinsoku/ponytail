@@ -1,5 +1,8 @@
 <div class="pt_table">
-  <div class="pt_table_name"><%= table.name %></div>
+  <div class="pt_table_name">
+    <span><%= table.name %></span>
+    <input type="text" />
+  </div>
   <div class="pt_columns">
     <% table.columns.each do |column| %>
       <div class="pt_column">
