@@ -7,11 +7,6 @@
     <div class="pt_new_table">
       <a href="#">New Table</a>
     </div>
-    <div class="pt_new_table_form">
-      <div class="pt_new_class_name">
-        <input type="text" />
-      </div>
-    </div>
   </div>
 
   <div>
@@ -42,5 +37,6 @@
 </div>
 
 <script type='text/javascript'>
-  setupNewMigration();
+  var elem = document.querySelector(".pt_new");
+  new NewMigrationView({element: elem});
 </script>
