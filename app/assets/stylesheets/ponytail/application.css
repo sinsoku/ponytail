@@ -87,6 +87,10 @@
   font-weight: bold;
 }
 
+.pt_new .pt_schema .pt_table_name input {
+  display: none;
+}
+
 .pt_new .pt_schema .pt_new_table {
   margin-top: 5px;
 }

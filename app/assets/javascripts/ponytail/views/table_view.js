@@ -9,21 +9,28 @@ TableView.prototype = {
     var isSaved = true;
     if (this.element === undefined) {
       this.element = this.createTable();
-      this.tableNameElement = this.element.querySelector(".pt_table_name");
-      this.inputTableName = this.tableNameElement.querySelector("input");
-      this.inputTableName.onblur = function() {
-        _this.setTableName(this.value);
-        _this.callbacks.forEach(function(func) {
-          func();
-        });
-      };
       isSaved = false;
     }
     this.tableNameElement = this.element.querySelector(".pt_table_name");
+    this.tableNameSpanElement = this.tableNameElement.querySelector("span");
+    this.inputTableNameElement = this.tableNameElement.querySelector("input");
+    this.tableNameSpanElement.onclick = function() {
+      _this.tableNameSpanElement.style.display = "none";
+      _this.inputTableNameElement.style.display = "block";
+      _this.inputTableNameElement.value = _this.tableNameSpanElement.innerHTML;
+    };
+    this.inputTableNameElement.onblur = function() {
+      _this.tableNameSpanElement.style.display = "block";
+      _this.inputTableNameElement.style.display = "none";
+      _this.setTableName(this.value);
+      _this.callbacks.forEach(function(func) {
+        func();
+      });
+    };
     this.columnElements = this.element.querySelectorAll(".pt_column");
     this.callbacks = [];
 
-    this.table = new Table({tableName: this.tableNameElement.value, isSaved: isSaved});
+    this.table = new Table({tableName: this.tableNameSpanElement.innerHTML, isSaved: isSaved});
     for(var i=0; i<this.columnElements.length; i++) {
       var name = this.columnElements[i].querySelector(".pt_column_name");
       var type = this.columnElements[i].querySelector(".pt_column_type");
@@ -32,7 +39,7 @@ TableView.prototype = {
     }
   },
   setTableName: function(tableName) {
-    this.tableNameElement.innerHTML = tableName;
+    this.tableNameSpanElement.innerHTML = tableName;
     this.table.tableName = tableName;
   },
   addChangeListener: function(callback) {
@@ -47,7 +54,7 @@ TableView.prototype = {
   createTable: function() {
     var elem = document.createElement("div");
     elem.setAttribute("class", "pt_table");
-    elem.innerHTML = '<div class="pt_table_name"><input type="text" /></div><div class="pt_columns"></div>';
+    elem.innerHTML = '<div class="pt_table_name"><span>tables</span><input type="text" /></div><div class="pt_columns"></div>';
     return elem;
   }
 };
