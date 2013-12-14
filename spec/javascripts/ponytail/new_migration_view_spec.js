@@ -1,16 +1,16 @@
-describe("TableView", function() {
+describe("NewMigrationView", function() {
   describe("#constructor", function() {
     var init;
     beforeEach(function() {
-      init = TableView.prototype.init;
-      spyOn(TableView.prototype, "init");
+      init = NewMigrationView.prototype.init;
+      spyOn(NewMigrationView.prototype, "init");
     });
     afterEach(function() {
-      TableView.prototype.init = init;
+      NewMigrationView.prototype.init = init;
     });
 
     it("should be able to initialize without init", function() {
-      var view = new TableView({init: false});
+      var view = new NewMigrationView({init: false});
       expect(view.init).not.toHaveBeenCalled();
     });
   });

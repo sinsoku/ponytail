@@ -1,16 +1,16 @@
 function NewMigrationView(option) {
-  this.element = option.element;
-  this.tableViews = [];
-  this.newTableLink = null;
-  this.migrationFileView = null;
-  this.init();
+  var init = option.init !== undefined ? option.init : true;
+  if (init) { this.init(option); }
 }
 NewMigrationView.prototype = {
-  init: function() {
+  init: function(option) {
+    this.element = option.element;
+    this.tableViews = [];
+    this.newTableLink = null;
+    this.migrationFileView = null;
     this.initTableViews();
     this.initMigrationView();
     this.initNewTableLink();
-    return this;
   },
   initTableViews: function() {
     var elems = document.querySelectorAll(".pt_table");
