@@ -51,7 +51,7 @@ NewMigrationView.prototype = {
     var file = new MigrationFile();
     file.setClassName(this.migrationFileView.getClassName());
     this.tableViews.forEach(function(tableView) {
-      tableView.toCommands().forEach(function(command) {
+      tableView.getCommands().forEach(function(command) {
         file.addCommand(command);
       });
     });
