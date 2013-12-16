@@ -34,6 +34,14 @@ Comment out `config.active_record.migration_error` in `config/environments/devel
 
 Visit `/rails/migrations` in your app.
 
+## How to work dummy app
+
+```bash
+$ rake db:migrate:reset
+$ cd spec/dummy
+$ rails s
+```
+
 ## Contributing
 
 1. Fork it

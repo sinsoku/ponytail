@@ -20,5 +20,9 @@ require 'action_controller'
 require 'rails'
 require 'ponytail'
 
+require File.expand_path("../dummy/config/environment", __FILE__)
+require 'capybara/rspec'
+Capybara.app = Dummy::Application
+
 app_dir = File.expand_path('../../app', __FILE__)
 Dir.glob("#{app_dir}/controllers/**/*.rb").each { |f| require f }
