@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "jasmine"
   spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "sqlite3"
 end
