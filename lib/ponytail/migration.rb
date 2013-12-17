@@ -44,5 +44,9 @@ module Ponytail
         false
       end
     end
+
+    def destroy
+      File.delete(filename)
+    end
   end
 end

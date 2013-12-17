@@ -23,6 +23,13 @@ module Ponytail
       end
     end
 
+    def destroy
+      # TODO: fix params[:id]
+      @migration = Migration.all.select { |x| x.version == params[:id].to_i }.first
+      @migration.destroy
+      redirect_to :migrations, notice: 'Migration was successfully deleted.'
+    end
+
     def migrate
       if Migration.migrate
         redirect_to :migrations, notice: 'Migrate was succeed.'
