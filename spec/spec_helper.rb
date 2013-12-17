@@ -17,10 +17,11 @@ end
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'active_record'
 require 'action_controller'
-require 'rails'
+require 'rails/engine'
 require 'ponytail'
 
 require File.expand_path("../dummy/config/environment", __FILE__)
+require 'rspec/rails'
 require 'capybara/rspec'
 Capybara.app = Dummy::Application
 
