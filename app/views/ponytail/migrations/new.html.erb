@@ -1,3 +1,5 @@
+<%= render 'table_view_template' %>
+
 <div class="pt_new">
   <div class="pt_schema">
     <% @schema.tables.each do |t| %>
@@ -15,5 +17,5 @@
 </div>
 
 <script type='text/javascript'>
-  new Ponytail.Views.NewMigrationView({el: $(".pt_new")}).render();
+  new Ponytail.Views.NewMigrationView({el: $(".pt_new")});
 </script>
