@@ -1,0 +1,23 @@
+<%= form_for migration, url: migrations_path do |f| %>
+  <%= render 'new_errors', migration: migration %>
+
+  <div class="pt_form_header">
+    <div class="pt_class_name">
+      <span>Class Name</span>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="pt_edit_checkbox">
+      <input type="checkbox" class="pt_checkbox" />
+      <span>edit</span>
+    </div>
+  </div>
+
+  <div class="pt_raw_content">
+    <%= f.text_area :raw_content, size: '60x20', disabled: true %>
+  </div>
+
+  <%= f.submit 'Create File', class: :pt_submit %>
+<% end %>
+
+<%= button_to 'Cancel', migrations_path, method: :get %>
