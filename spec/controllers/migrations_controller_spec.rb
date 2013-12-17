@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Ponytail
   describe MigrationsController do
-    let(:controller) { MigrationsController.new }
+    # let(:controller) { MigrationsController.new }
 
     describe "#index" do
       before do
