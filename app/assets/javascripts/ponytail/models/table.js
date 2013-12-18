@@ -27,7 +27,7 @@ Table.prototype = {
     } else if (this.isSaved()) {
       var commands = [];
       if (this.beforeTableName != this.tableName) {
-        commands.push(new Command("rename_table", ":" + this.beforeTableName, ":" + this.tableName));
+        commands.push(new Command("rename_table", ":" + this.beforeTableName, ", :" + this.tableName));
       }
       // TODO: add_column, ...etc
       return commands;
