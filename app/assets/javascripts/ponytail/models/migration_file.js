@@ -1,10 +1,11 @@
 Ponytail.Models.MigrationFile = Backbone.Model.extend({
   defaults: {
+    className: "",
+    rawContent: "",
   },
   initialize: function(attrs, options) {
   },
-  updateByTables: function(tables) {
-    // TODO
-    console.log(tables);
+  update: function() {
+    console.log(this.get("tables"));
   }
 });
