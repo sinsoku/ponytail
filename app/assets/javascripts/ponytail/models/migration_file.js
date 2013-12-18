@@ -3,4 +3,8 @@ Ponytail.Models.MigrationFile = Backbone.Model.extend({
   },
   initialize: function(attrs, options) {
   },
+  updateByTables: function(tables) {
+    // TODO
+    console.log(tables);
+  }
 });

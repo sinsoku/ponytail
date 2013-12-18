@@ -13,6 +13,7 @@ Ponytail.Views.TableView = Backbone.View.extend({
   updateTableName: function() {
     var v = $(this.el).find(".pt_table_name input")[0].value;
     $(this.el).find(".pt_table_name span").text(v);
+    this.model.set({name: v});
   },
   toggleTableName: function() {
     $(this.el).find(".pt_table_name span").toggle();
