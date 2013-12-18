@@ -1,10 +1,8 @@
 Ponytail.Models.Table = Backbone.Model.extend({
   defaults: {
     name: "",
+    columns: [],
     isDrop: false,
-    isSaved: false,
-    columns: []
-  },
-  initialize: function(attrs, options) {
+    isCreated: false,
   },
 });
