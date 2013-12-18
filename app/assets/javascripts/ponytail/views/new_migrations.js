@@ -4,7 +4,9 @@ Ponytail.Views.NewMigrationView = Backbone.View.extend({
   },
   initialize: function() {
     $(".pt_table").each(function() {
-      new Ponytail.Views.TableView({el: $(this)});
+      var name = $(this).find(".pt_table_name span").text();
+      var m = new Ponytail.Models.Table({name: name});
+      new Ponytail.Views.TableView({el: $(this), model: m});
     });
     var migrationFile = new Ponytail.Models.MigrationFile();
     new Ponytail.Views.MigrationFileView({el: $(".migration_file_view"), model: migrationFile});
