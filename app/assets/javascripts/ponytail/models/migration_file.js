@@ -5,6 +5,7 @@ Ponytail.Models.MigrationFile = Backbone.Model.extend({
   },
   initialize: function(attrs, options) {
     this.tables = [];
+    this.bind("change:className", this.update);
   },
   updateByTables: function(tables) {
     this.tables = tables;

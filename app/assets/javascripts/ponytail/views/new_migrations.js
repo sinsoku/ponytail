@@ -10,11 +10,11 @@ Ponytail.Views.NewMigrationView = Backbone.View.extend({
       tables.push(m);
       new Ponytail.Views.TableView({el: $(this), model: m});
     });
-    var migrationFile = new Ponytail.Models.MigrationFile({tables: tables});
+    var migrationFile = new Ponytail.Models.MigrationFile();
     new Ponytail.Views.MigrationFileView({el: $(".migration_file_view"), model: migrationFile});
     tables.forEach(function(table) {
       table.bind("change", function() {
-        migrationFile.update();
+        migrationFile.updateByTables(tables);
       });
     });
   },
