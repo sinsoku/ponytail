@@ -4,6 +4,7 @@ Ponytail.Views.TableView = Backbone.View.extend({
     "click .pt_table_name span": "toggleTableName",
     "keyup .pt_table_name input": function(e) { this.model.set({name: e.target.value}); },
     "blur .pt_table_name input": "toggleTableName",
+    "click .pt_drop_table": function() { this.model.set({isDrop: true}); return false; },
   },
   initialize: function(options) {
     _.bindAll(this, "render");

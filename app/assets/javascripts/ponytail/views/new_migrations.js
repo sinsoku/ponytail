@@ -17,9 +17,17 @@ Ponytail.Views.NewMigrationView = Backbone.View.extend({
         migrationFile.updateByTables(tables);
       });
     });
+    this.tables = tables;
+    this.migrationFile = migrationFile;
   },
   appendTableView: function() {
-    var m = new Ponytail.Models.Table();
+    var tables = this.tables;
+    var migrationFile = this.migrationFile;
+    var m = new Ponytail.Models.Table({isCreated: true});
+    tables.push(m);
+    m.bind("change", function() {
+      migrationFile.updateByTables(tables);
+    });
     var v = new Ponytail.Views.TableView({model: m});
     $(".pt_new_table").before(v.render().el);
     return false;

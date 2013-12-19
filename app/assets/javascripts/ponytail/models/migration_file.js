@@ -28,7 +28,6 @@ Ponytail.Models.MigrationFile = Backbone.Model.extend({
   },
   getStringOfCommands: function() {
     var commands = this.getCommands();
-    console.log(commands);
     return commands.map(function(command) {
       return command.toString();
     }).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ");
