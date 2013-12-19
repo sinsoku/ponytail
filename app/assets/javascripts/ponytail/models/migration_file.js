@@ -14,15 +14,28 @@ Ponytail.Models.MigrationFile = Backbone.Model.extend({
   update: function() {
     var rawContent = [
       "class " + this.get("className") + " < ActiveRecord::MigrationFile",
-      this.getStringOfCommands(),
+      this.getContentOfClass(),
       "end",
     ].join("\n");
     this.set({"rawContent": rawContent});
   },
+  getContentOfClass: function() {
+    return _.compact([
+      "def change",
+      this.getStringOfCommands(),
+      "end",
+    ]).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ");
+  },
   getStringOfCommands: function() {
-    return [
-      "  def change",
-      "  end",
-    ].join("\n");
-  }
+    var commands = this.getCommands();
+    console.log(commands);
+    return commands.map(function(command) {
+      return command.toString();
+    }).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ");
+  },
+  getCommands: function() {
+    return _.flatten(this.tables.map(function(table) {
+      return table.getCommands();
+    }));
+  },
 });
