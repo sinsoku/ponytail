@@ -1,24 +1,40 @@
-function MigrationFile() {
-  this.className = "";
-  this.commands = [];
-}
-MigrationFile.prototype = {
-  setClassName: function(className) {
-    this.className = className;
+Ponytail.Models.MigrationFile = Backbone.Model.extend({
+  defaults: {
+    className: "",
+    rawContent: "",
   },
-  toString: function() {
-    return ["class " + this.className + " < ActiveRecord::Migration",
-           "  def change",
-           this.toStringOfCommands(),
-           "  end",
-           "end"].join("\n");
+  initialize: function(attrs, options) {
+    this.tables = [];
+    this.bind("change:className", this.update);
   },
-  addCommand: function(command) {
-    this.commands.push(command);
+  updateByTables: function(tables) {
+    this.tables = tables;
+    this.update();
   },
-  toStringOfCommands: function() {
-    return this.commands.map(function(command) {
+  update: function() {
+    var rawContent = [
+      "class " + this.get("className") + " < ActiveRecord::MigrationFile",
+      this.getContentOfClass(),
+      "end",
+    ].join("\n");
+    this.set({"rawContent": rawContent});
+  },
+  getContentOfClass: function() {
+    return _.compact([
+      "def change",
+      this.getStringOfCommands(),
+      "end",
+    ]).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ");
+  },
+  getStringOfCommands: function() {
+    var commands = this.getCommands();
+    return commands.map(function(command) {
       return command.toString();
-    }).join("\n").replace(/^/, "    ").replace(/\n/g, "\n    ");
-  }
-};
+    }).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ");
+  },
+  getCommands: function() {
+    return _.flatten(this.tables.map(function(table) {
+      return table.getCommands();
+    }));
+  },
+});

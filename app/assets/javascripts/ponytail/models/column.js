@@ -1,6 +1,6 @@
-function Column(option) {
-  this.name = option.name;
-  this.type = option.type;
-}
-Column.prototype = {
-};
+Ponytail.Models.Column = Backbone.Model.extend({
+  defaults: {
+    isRemoved: false,
+    isAdded: false,
+  },
+});

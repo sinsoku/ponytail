@@ -1,17 +1,14 @@
 <div class="pt_table">
   <div class="pt_table_name">
     <span><%= table.name %></span>
-    <input type="text" />
+    <input type="text" value="<%= table.name %>" style="display: none;" />
   </div>
   <div>
     <a href="#" class="pt_drop_table">drop</a>
   </div>
   <div class="pt_columns">
     <% table.columns.each do |column| %>
-      <div class="pt_column">
-        <div class="pt_column_type"><%= column.type %></div>
-        <div class="pt_column_name"><%= column.name %></div>
-      </div>
-  <% end %>
+      <%= render 'column', column: column %>
+    <% end %>
   </div>
 </div>

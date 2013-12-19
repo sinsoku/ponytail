@@ -11,7 +11,12 @@
 #   - dist/**/*.js
 #
 src_files:
-  - app/assets/javascripts/**/*.js
+  - vendor/assets/javascripts/jquery.min.js
+  - vendor/assets/javascripts/jquery_ujs.js
+  - vendor/assets/javascripts/underscore-min.js
+  - vendor/assets/javascripts/backbone-min.js
+  - app/assets/javascripts/ponytail/ponytail.js
+  - app/assets/javascripts/ponytail/**/*.js
 
 # stylesheets
 #
