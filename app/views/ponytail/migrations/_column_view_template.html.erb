@@ -1,4 +1,10 @@
 <script type="text/template" id="column_view_template">
-  <div class="pt_column_type"><%%= type %></div>
-  <div class="pt_column_name"><%%= name %></div>
+  <div class="pt_column_type">
+    <span style="display: none;"><%%= type %></span>
+    <input type="text" value="<%%= type %>" />
+  </div>
+  <div class="pt_column_name">
+    <span style="display: none;"><%%= name %></span>
+    <input type="text" value="<%%= name %>" />
+  </div>
 </script>

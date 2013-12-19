@@ -1,4 +1,10 @@
 <div class="pt_column">
-  <div class="pt_column_type"><%= column.type %></div>
-  <div class="pt_column_name"><%= column.name %></div>
+  <div class="pt_column_type">
+    <span><%= column.type %></span>
+    <input type="text" value="<%= column.type %>" style="display: none;" />
+  </div>
+  <div class="pt_column_name">
+    <span><%= column.name %></span>
+    <input type="text" value="<%= column.name %>" style="display: none;" />
+  </div>
 </div>

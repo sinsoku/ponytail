@@ -87,7 +87,7 @@
   font-weight: bold;
 }
 
-.pt_new .pt_schema .pt_table_name span {
+.pt_new .pt_schema span {
   cursor: pointer;
 }
 

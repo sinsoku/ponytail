@@ -9,6 +9,16 @@ Ponytail.Views.TableView = Backbone.View.extend({
   initialize: function(options) {
     _.bindAll(this, "render");
     this.model.bind("change", this.render);
+    var table = this.model;
+    var columns = [];
+    _.each($(this.el).find(".pt_column"), function(elem) {
+      var type = $(elem).find(".pt_column_type span").text();
+      var name = $(elem).find(".pt_column_name span").text();
+      var m = new Ponytail.Models.Column({table: table, type: type, name: name});
+      new Ponytail.Views.ColumnView({el: elem, model: m});
+      columns.push(m);
+    });
+    this.model.set({columns: columns}, {silent: true});
   },
   render: function() {
     if (this.el.parentNode === null) {
