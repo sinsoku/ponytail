@@ -29,8 +29,10 @@ Ponytail.Models.Table = Backbone.Model.extend({
       if (this.isRename()) {
         commands.push(new Ponytail.Models.RenameTableCommand(this.beforeName, this.get("name")));
       }
-      // TODO: command of columns
-      return commands;
+      this.get("columns").forEach(function(column) {
+        commands.push(column.getCommands());
+      });
+      return _.compact(_.flatten(commands));
     }
   }
 });

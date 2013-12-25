@@ -1,4 +1,22 @@
 <div class="pt_column">
-  <div class="pt_column_type"><%= column.type %></div>
-  <div class="pt_column_name"><%= column.name %></div>
+  <div class="pt_column_type">
+    <span><%= column.type %></span>
+    <select style="display: none;">
+      <option value="string">string</option>
+      <option value="text">text</option>
+      <option value="integer">integer</option>
+      <option value="float">float</option>
+      <option value="decimal">decimal</option>
+      <option value="datetime">datetime</option>
+      <option value="timestamp">timestamp</option>
+      <option value="time">time</option>
+      <option value="date">date</option>
+      <option value="binary">binary</option>
+      <option value="boolean">boolean</option>
+    </select>
+  </div>
+  <div class="pt_column_name">
+    <span><%= column.name %></span>
+    <input type="text" value="<%= column.name %>" style="display: none;" />
+  </div>
 </div>
