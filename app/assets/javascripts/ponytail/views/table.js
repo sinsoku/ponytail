@@ -4,7 +4,8 @@ Ponytail.Views.TableView = Backbone.View.extend({
     "click .pt_table_name span": "toggleTableName",
     "keyup .pt_table_name input": function(e) { this.model.set({name: e.target.value}); },
     "blur .pt_table_name input": "toggleTableName",
-    "click .pt_drop_table": function() { this.model.set({isDrop: true}); return false; },
+    "click .pt_drop_table": "dropTable",
+    "click .pt_restore_table": "restoreTable",
   },
   initialize: function(options) {
     _.bindAll(this, "render");
@@ -37,4 +38,16 @@ Ponytail.Views.TableView = Backbone.View.extend({
     $(this.el).find(".pt_table_name span").toggle();
     $(this.el).find(".pt_table_name input").toggle();
   },
+  dropTable: function(e) {
+    this.model.set({isDrop: true});
+    $(this.el).find(".pt_drop_table").hide();
+    $(this.el).find(".pt_restore_table").show();
+    return false;
+  },
+  restoreTable: function(e) {
+    this.model.set({isDrop: false});
+    $(this.el).find(".pt_drop_table").show();
+    $(this.el).find(".pt_restore_table").hide();
+    return false;
+  }
 });
