@@ -1,32 +1,23 @@
 describe("Table", function() {
-  describe("#constructor", function() {
-    it("should be able to set tableName", function() {
-      var table = new Table({tableName: "users"});
-      expect(table.tableName).toBe("users");
-    });
-  });
-
-  describe("#isSaved", function() {
-    describe("don't set isSaved option (default)", function() {
-      it("should be false", function() {
-        var table = new Table();
-        expect(table.isSaved()).toBe(false);
-      });
-    });
-    describe("set isSaved option", function() {
-      it("should be true", function() {
-        var table = new Table({isSaved: true});
-        expect(table.isSaved()).toBe(true);
-      });
-    });
-  });
-
   describe("#getCommands", function() {
-    describe("isCreated set false", function() {
-      it("commands[0] to equal CreateTable", function() {
-        var table = new Table({isCreated: false});
-        var commands = table.getCommands();
-        expect(commands[0]).toEqual(jasmine.any(CreateTable));
+    describe("if table was created", function() {
+      it("should be a kind of CreateTableCommand ", function() {
+        var table = new Ponytail.Models.Table({isCreated: true});
+        var command = table.getCommands()[0];
+        expect(command).toEqual(jasmine.any(Ponytail.Models.CreateTableCommand));
+      });
+    });
+    describe("if table was dropped", function() {
+      it("should be a kind of DropTableCommand ", function() {
+        var table = new Ponytail.Models.Table({isDrop: true});
+        var command = table.getCommands()[0];
+        expect(command).toEqual(jasmine.any(Ponytail.Models.DropTableCommand));
+      });
+    });
+    describe("if table was created, and was dropped", function() {
+      it("should be []", function() {
+        var table = new Ponytail.Models.Table({isCreated: true, isDrop: true});
+        expect(table.getCommands()).toEqual([]);
       });
     });
   });

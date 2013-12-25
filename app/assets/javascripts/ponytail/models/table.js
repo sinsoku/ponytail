@@ -1,40 +1,44 @@
-function Table(option) {
-  if (option === undefined) { option = {}; }
-  this.beforeTableName = option.tableName;
-  this.tableName = option.tableName;
-  this._isSaved = option.isSaved;
-  this._drop = false;
-  this.columns = [];
-}
-Table.prototype = {
-  isSaved: function() {
-    return this._isSaved ? true : false;
+Ponytail.Models.Table = Backbone.Model.extend({
+  defaults: {
+    name: "new_table",
+    columns: [],
+    isDrop: false,
+    isCreated: false,
+  },
+  initialize: function (attrs, options) {
+    this.beforeName = attrs.name || "";
+  },
+  isCreated: function() {
+    return this.get("isCreated") === true;
   },
   isDrop: function() {
-    return this._drop;
+    return this.get("isDrop") === true;
   },
-  drop: function() {
-    this._drop = true;
+  isRename: function() {
+    return this.beforeName != this.get("name");
   },
   addColumn: function(column) {
-    this.columns.push(column);
+    var columns = this.get("columns");
+    columns.push(column);
+    this.set({columns: columns});
+    this.trigger("change");
   },
   getCommands: function() {
-    if (this.isDrop() && this.isSaved()) {
-      return [new Command("drop_table", ":" + this.beforeTableName)];
-    } else if (this.isDrop() && !this.isSaved()) {
+    if (this.isCreated() && this.isDrop()) {
       return [];
-    } else if (this.isSaved()) {
-      var commands = [];
-      if (this.beforeTableName != this.tableName) {
-        commands.push(new Command("rename_table", ":" + this.beforeTableName, ":" + this.tableName));
-      }
-      // TODO: add_column, ...etc
-      return commands;
+    } else if (this.isCreated() && !this.isDrop()) {
+      return [new Ponytail.Models.CreateTableCommand(this.get("name"), this.get("columns"))];
+    } else if (!this.isCreated() && this.isDrop()) {
+      return [new Ponytail.Models.DropTableCommand(this.beforeName)];
     } else {
-      var command = new CreateTable();
-      command.setTableName(this.tableName);
-      return [command];
+      var commands = [];
+      if (this.isRename()) {
+        commands.push(new Ponytail.Models.RenameTableCommand(this.beforeName, this.get("name")));
+      }
+      this.get("columns").forEach(function(column) {
+        commands.push(column.getCommands());
+      });
+      return _.compact(_.flatten(commands));
     }
   }
-};
+});

@@ -17,3 +17,5 @@ test/version_tmp
 tmp
 
 /vendor/bundle
+*.sqlite3
+log

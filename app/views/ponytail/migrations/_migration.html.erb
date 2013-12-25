@@ -4,6 +4,7 @@
     <div class="pt_migration_header">
       <span class="pt_name"><%= migration.name %></span>
       <span class="pt_filename"><%= migration.filename %></span>
+      <%= link_to 'delete', migration_path(migration.version), method: :delete, confirm: 'Are you sure?' %>
     </div>
     <div class="pt_raw_content">
       <pre><%= migration.raw_content %></pre>

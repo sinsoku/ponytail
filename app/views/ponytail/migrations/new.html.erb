@@ -1,3 +1,6 @@
+<%= render 'table_view_template' %>
+<%= render 'column_view_template' %>
+
 <div class="pt_new">
   <div class="pt_schema">
     <% @schema.tables.each do |t| %>
@@ -9,34 +12,11 @@
     </div>
   </div>
 
-  <div>
-    <%= form_for @migration, url: migrations_path do |f| %>
-      <%= render 'new_errors', migration: @migration %>
-
-      <div class="pt_form_header">
-        <div class="pt_class_name">
-          <span>Class Name</span>
-          <%= f.text_field :name %>
-        </div>
-
-        <div class="pt_edit_checkbox">
-          <input type="checkbox" class="pt_checkbox" />
-          <span>edit</span>
-        </div>
-      </div>
-
-      <div class="pt_raw_content">
-        <%= f.text_area :raw_content, size: '60x20', disabled: true %>
-      </div>
-
-      <%= f.submit 'Create File', class: :pt_submit %>
-    <% end %>
-
-    <%= button_to 'Cancel', migrations_path, method: :get %>
+  <div class="migration_file_view">
+    <%= render 'migration_file', migration: @migration %>
   </div>
 </div>
 
 <script type='text/javascript'>
-  var elem = document.querySelector(".pt_new");
-  new NewMigrationView({element: elem});
+  new Ponytail.Views.NewMigrationView({el: $(".pt_new")});
 </script>

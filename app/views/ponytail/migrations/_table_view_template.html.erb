@@ -1,0 +1,23 @@
+<script type="text/template" id="table_view_template">
+  <div class="pt_table">
+    <div class="pt_table_name">
+      <span style="display: none;"><%%= name %></span>
+      <input type="text" value="<%%= name %>" />
+    </div>
+    <div>
+      <a href="#" class="pt_drop_table">drop</a>
+      <a href="#" class="pt_restore_table" style="display: none;">restore</a>
+    </div>
+    <div class="pt_columns">
+      <%% _.each(columns, function(column) { %>
+        <div class="pt_column">
+          <div class="pt_column_type"><%%= column.type %></div>
+          <div class="pt_column_name"><%%= column.name %></div>
+        </div>
+    <%% }); %>
+      <div>
+        <a href="#" class="pt_add_column">Add Column</a>
+      </div>
+    </div>
+  </div>
+</script>
