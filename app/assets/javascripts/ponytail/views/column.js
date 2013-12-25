@@ -1,4 +1,5 @@
 Ponytail.Views.ColumnView = Backbone.View.extend({
+  className: 'pt_column',
   events: {
     "click .pt_column_type span": "toggleColumnType",
     "blur .pt_column_type select": "changeColumnType",

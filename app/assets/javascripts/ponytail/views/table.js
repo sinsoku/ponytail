@@ -6,6 +6,7 @@ Ponytail.Views.TableView = Backbone.View.extend({
     "blur .pt_table_name input": "toggleTableName",
     "click .pt_drop_table": "dropTable",
     "click .pt_restore_table": "restoreTable",
+    "click .pt_add_column": "addColumn",
   },
   initialize: function(options) {
     _.bindAll(this, "render");
@@ -48,6 +49,13 @@ Ponytail.Views.TableView = Backbone.View.extend({
     this.model.set({isDrop: false});
     $(this.el).find(".pt_drop_table").show();
     $(this.el).find(".pt_restore_table").hide();
+    return false;
+  },
+  addColumn: function(e) {
+    var column = new Ponytail.Models.Column({table: this.model, isAdded: true});
+    var view = new Ponytail.Views.ColumnView({model: column});
+    $(this.el).find(".pt_columns").append(view.render().el);
+    this.model.addColumn(column);
     return false;
   }
 });

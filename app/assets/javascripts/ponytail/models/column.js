@@ -1,5 +1,7 @@
 Ponytail.Models.Column = Backbone.Model.extend({
   defaults: {
+    type: "string",
+    name: "new_column",
     isRemoved: false,
     isAdded: false,
   },

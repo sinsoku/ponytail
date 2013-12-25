@@ -1,6 +1,6 @@
 Ponytail.Models.Table = Backbone.Model.extend({
   defaults: {
-    name: "",
+    name: "new_table",
     columns: [],
     isDrop: false,
     isCreated: false,
@@ -16,6 +16,12 @@ Ponytail.Models.Table = Backbone.Model.extend({
   },
   isRename: function() {
     return this.beforeName != this.get("name");
+  },
+  addColumn: function(column) {
+    var columns = this.get("columns");
+    columns.push(column);
+    this.set({columns: columns});
+    this.trigger("change");
   },
   getCommands: function() {
     if (this.isCreated() && this.isDrop()) {

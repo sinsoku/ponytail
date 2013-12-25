@@ -7,7 +7,7 @@ Ponytail.Models.CreateTableCommand.prototype = {
     return [
         "create_table :" + this.tableName + " do |t|",
         this.columns.map(function(column) {
-          return "t." + column.type + " :" + column.name;
+          return "t." + column.get("type") + " :" + column.get("name");
         }).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  "),
         "  t.timestamps",
         "end",

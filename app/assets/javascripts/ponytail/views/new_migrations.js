@@ -28,6 +28,7 @@ Ponytail.Views.NewMigrationView = Backbone.View.extend({
     m.bind("change", function() {
       migrationFile.updateByTables(tables);
     });
+    m.trigger("change");
     var v = new Ponytail.Views.TableView({model: m});
     $(".pt_new_table").before(v.render().el);
     return false;
