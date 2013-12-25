@@ -15,7 +15,7 @@ Ponytail.Views.TableView = Backbone.View.extend({
       var type = $(elem).find(".pt_column_type span").text();
       var name = $(elem).find(".pt_column_name span").text();
       var m = new Ponytail.Models.Column({table: table, type: type, name: name});
-      new Ponytail.Views.ColumnView({el: elem, model: m});
+      new Ponytail.Views.ColumnView({el: elem, model: m}).render();
       columns.push(m);
     });
     this.model.set({columns: columns}, {silent: true});
