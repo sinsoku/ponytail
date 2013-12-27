@@ -84,7 +84,7 @@
       .migration_file_header {
         @extend .horizontal-box;
 
-        .filename {
+        .classname {
           @include box-flex(1);
           span {
             display: none;
