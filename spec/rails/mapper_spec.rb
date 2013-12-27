@@ -9,7 +9,7 @@ module ActionDispatch::Routing
       it "should receive resources" do
         mapper.should_receive(:resources) { |*args, &block| block.call }
         mapper.should_receive(:collection) { |*args, &block| block.call }
-        mapper.should_receive(:post).twice
+        mapper.should_receive(:get).twice
         mapper.mount_ponytail
       end
     end

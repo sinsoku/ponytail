@@ -1,0 +1,49 @@
+.index {
+  @extend .vertical-box;
+  width: 1024px;
+  height: 768px;
+
+  .container {
+    @extend .horizontal-box;
+
+    div {
+      @include box-flex(1);
+      margin: 0 2px;
+    }
+
+    .migration_filepath {
+      margin: 2px 0;
+    }
+
+    .migration_files {
+      height: 500px;
+      overflow-y: auto;
+
+      .raw_content {
+        display: none;
+      }
+    }
+
+    .migration_filename {
+      margin: 2px 0;
+    }
+
+    .raw_content {
+      @include border-radius(5px);
+      background: whitesmoke;
+      padding: 5px;
+
+      pre {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .actions {
+    @extend .horizontal-box;
+
+    .migrate {
+      margin-left: 10px;
+    }
+  }
+}
