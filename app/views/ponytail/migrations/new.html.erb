@@ -1,22 +1,62 @@
-<%= render 'ponytail/templates/table_view' %>
-<%= render 'ponytail/templates/column_view' %>
-
-<div class="pt_new">
-  <div class="pt_schema">
-    <% @schema.tables.each do |t| %>
-      <%= render 'table', table: t %>
-    <% end %>
-
-    <div class="pt_new_table">
-      <a href="#">New Table</a>
-    </div>
+<div class="new">
+  <div class="header">
+    <a href="/rails/migrations">index</a>
+    <span>|</span>
+    <span>new</span>
   </div>
 
-  <div class="migration_file_view">
-    <%= render 'migration_file', migration: @migration %>
+  <% if notice %>
+    <div class="notice">
+      <div class="message"><%= notice %></div>
+      <div class="close"><a href="#">x</a></div>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <div class="tables">
+      <% @schema.tables.each do |table| %>
+        <div class="table">
+          <div class="table_name"><%= table.name %></div>
+          <div class="edit_table"><a href="#">edit</a></div>
+          <div class="drop_table"><a href="#">drop</a></div>
+        </div>
+        <div class="columns">
+          <% table.columns.each do |column| %>
+            <div class="column">
+              <div class="column_type"><%= column.type %></div>
+              <div class="column_name"><%= column.name %></div>
+              <div class="edit_column"><a href="#">edit</a></div>
+              <div class="remove_column"><a href="#">remove</a></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="migration_file">
+      <div class="migration_file_header">
+        <div class="filename">
+          <span>new_migration.rb</span>
+          <input type="text" value="new_migration.rb" />
+        </div>
+
+        <div class="edit_checkbox">
+          <input type="checkbox" />
+          <span>edit</span>
+        </div>
+      </div>
+
+      <div class="raw_content">
+        <textarea disabled="disabled"></textarea>
+      </div>
+
+      <div class="actions">
+        <button>Create File</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script type='text/javascript'>
-  new Ponytail.Views.NewMigrationView({el: $(".pt_new")});
+  new Ponytail.Views.New({el: $(".new")}).render();
 </script>
