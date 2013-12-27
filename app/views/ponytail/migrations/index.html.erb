@@ -1,17 +1,57 @@
-<div class="pt_index">
-  <%= render 'notice' %>
+<div class="index">
+  <div class="header">
+    <span>index</span>
+    <span>|</span>
+    <a href="migrations/new">new</a>
+  </div>
 
-  <% @migrations.each do |migration| %>
-    <%= render 'migration', migration: migration, current: @current_version %>
+  <% if notice %>
+    <div class="notice">
+      <div class="message"><%= notice %></div>
+      <div class="close"><a href="#">x</a></div>
+    </div>
   <% end %>
 
-  <div class="pt_actions">
-    <%= button_to 'New', new_migration_path, method: :get, disabled: Ponytail::Migration.check_pending? %>
-    <%= button_to 'Migrate', migrate_migrations_path, disabled: Ponytail::Migration.check_pending? %>
-    <%= button_to 'Rollback', rollback_migrations_path, disabled: Ponytail::Migration.check_pending? %>
+  <div class="container">
+    <div>
+      <!-- TODO: fake it! -->
+      <% path = 'db/migrate/' %>
+      <div class="migration_filepath"><%= path %></div>
+      <div class="migration_files">
+        <table>
+          <% @migrations.each do |migration| %>
+            <tr>
+              <td><%= migration.version == @current_version ? "*" : "" %></td>
+              <!-- TODO: fake it!(sub) -->
+              <td class="filename"><%= migration.filename.sub(path, "") %></td>
+              <td class="raw_content"><%= migration.raw_content %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div class="migration_file">
+      <% migration = @migrations[0] %>
+      <!-- TODO: fake it!(sub) -->
+      <div class="filename"><%= migration.filename.sub(path, "") %></div>
+      <div class="raw_content">
+        <pre><%= migration.raw_content %></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div>
+      <button class="new_button">New</button>
+    </div>
+    <div class="migrate">
+      <button class="migrate_button">Migrate</button>
+      <button class="rollback_button">Rollback</button>
+    </div>
   </div>
 </div>
 
 <script type='text/javascript'>
-  setupIndex();
+  new Ponytail.Views.Index({el: $(".index")}).render();
 </script>

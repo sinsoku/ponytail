@@ -3,8 +3,8 @@ module ActionDispatch::Routing
     def mount_ponytail
       resources :migrations, only: [:index, :new, :create, :destroy], module: :ponytail, path: 'rails/migrations' do
         collection do
-          post :migrate
-          post :rollback
+          get :migrate
+          get :rollback
         end
       end
     end
