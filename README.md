@@ -42,6 +42,12 @@ $ cd spec/dummy
 $ rails s
 ```
 
+## Example site
+
+Dummy app is deploying on heroku. However, you can not change the migration files and databases.
+
+http://ponytail.herokuapp.com/rails/migrations
+
 ## Contributing
 
 1. Fork it

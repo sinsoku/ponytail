@@ -8,3 +8,14 @@ branches:
     - feature/travis
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: KNrZiAeHZ0ZX2QtRKYsgPeY9f+LGHw8AJOnKkQJ2/rJi7r4sWqFFkvqq6Kr9KzzjMwf+rtYyaRoF0e6iBEiETlBTpLD7HRKqNpL9EHMiWf1xYBt3C89MyOdyvP46lGp6Z8Bkc8HfYiPTkFc20XatIv/qH6qlMWSpBTyPg1DIQTw=
+  app: ponytail
+  on:
+    repo: sinsoku/ponytail
+    branch: develop
+  run:
+    - "rake db:migrate"
+    - restart

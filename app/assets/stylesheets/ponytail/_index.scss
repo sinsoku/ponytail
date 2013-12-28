@@ -1,0 +1,68 @@
+.index {
+  @extend .vertical-box;
+  width: 1024px;
+  height: 768px;
+
+  .container {
+    @extend .horizontal-box;
+
+    > div {
+      @include box-flex(1);
+      margin: 0 2px;
+    }
+
+    .migration_filepath {
+      margin: 2px 0;
+    }
+
+    .migration_files {
+      height: 500px;
+      overflow-y: auto;
+
+      table {
+        width: 100%;
+      }
+
+      .filename {
+        padding: 2px;
+        cursor: pointer;
+        &:hover {
+          background-color: cornsilk;
+        }
+      }
+
+      .raw_content {
+        display: none;
+      }
+    }
+
+    .migration_file {
+      .migration_filename {
+        margin: 2px 0;
+        padding: 2px;
+
+        &.highlight {
+          animation: highlight 1s 1;
+        }
+      }
+      .raw_content {
+        @include border-radius(5px);
+        background: whitesmoke;
+        margin-top: 2px;
+        padding: 5px;
+
+        pre {
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+
+  .actions {
+    @extend .horizontal-box;
+
+    .migrate {
+      margin-left: 10px;
+    }
+  }
+}

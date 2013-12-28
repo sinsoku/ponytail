@@ -1,0 +1,38 @@
+.horizontal-box {
+  @include display-box;
+  @include box-orient(horizontal);
+}
+
+.vertical-box {
+  @include display-box;
+  @include box-orient(vertical);
+}
+
+@keyframes highlight {
+  0% { background-color: yellow; }
+  100% { background-color: white; }
+}
+
+.header {
+  @include border-radius(5px);
+  border: 1px solid #000;
+  margin-bottom: 5px;
+  padding: 5px;
+
+  > * {
+    margin: 0 3px;
+  }
+}
+
+.notice {
+  @include display-box;
+  @include border-radius(5px);
+  margin: 5px 0;
+  padding: 5px;
+  background: limegreen;
+  color: white;
+
+  .message {
+    @include box-flex(1);
+  }
+}

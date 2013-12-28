@@ -1,22 +1,93 @@
-<%= render 'table_view_template' %>
-<%= render 'column_view_template' %>
+<%= render 'ponytail/templates/table' %>
+<%= render 'ponytail/templates/column' %>
 
-<div class="pt_new">
-  <div class="pt_schema">
-    <% @schema.tables.each do |t| %>
-      <%= render 'table', table: t %>
-    <% end %>
-
-    <div class="pt_new_table">
-      <a href="#">New Table</a>
-    </div>
+<div class="new">
+  <div class="header">
+    <a href="/rails/migrations">index</a>
+    <span>|</span>
+    <span>new</span>
   </div>
 
-  <div class="migration_file_view">
-    <%= render 'migration_file', migration: @migration %>
+  <% notice = @migration.errors.full_messages if @migration.errors.any? %>
+  <% if notice %>
+    <div class="notice">
+      <div class="message"><%= notice %></div>
+      <div class="close"><a href="#">x</a></div>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <div class="tables">
+      <% @schema.tables.each do |table| %>
+        <div class="table">
+          <div class="horizontal-box">
+            <div class="table_name">
+              <span><%= table.name %></span>
+              <input type="text" value="<%= table.name %>" />
+            </div>
+            <div class="edit_table"><a href="#">edit</a></div>
+            <div class="drop_table"><a href="#">drop</a></div>
+            <div class="restore_table"><a href="#">restore</a></div>
+          </div>
+          <div class="columns">
+            <% table.columns.each do |column| %>
+              <div class="column">
+                <div class="column_type">
+                  <span><%= column.type %></span>
+                  <select>
+                    <option value="string">string</option>
+                    <option value="text">text</option>
+                    <option value="integer">integer</option>
+                    <option value="float">float</option>
+                    <option value="decimal">decimal</option>
+                    <option value="datetime">datetime</option>
+                    <option value="timestamp">timestamp</option>
+                    <option value="time">time</option>
+                    <option value="date">date</option>
+                    <option value="binary">binary</option>
+                    <option value="boolean">boolean</option>
+                  </select>
+                </div>
+                <div class="column_name">
+                  <span><%= column.name %></span>
+                  <input type="text" value="<%= column.name %>" />
+                </div>
+                <div class="remove_column"><a href="#">remove</a></div>
+                <div class="restore_column"><a href="#">restore</a></div>
+              </div>
+            <% end %>
+            <div class="add_column"><a href="#">Add Column</a></div>
+          </div>
+        </div>
+      <% end %>
+      <div class="new_table"><a href="#">New Table</a></div>
+    </div>
+
+    <%= form_for @migration, url: migrations_path do |f| %>
+      <div class="migration_file">
+        <div class="migration_file_header">
+          <div class="classname">
+            <input type="text" name="ponytail_migration[name]" value="NewMigration" />
+          </div>
+
+          <div class="edit_checkbox">
+            <input type="checkbox" />
+            <span>edit</span>
+          </div>
+        </div>
+
+        <div class="raw_content">
+          <textarea name="ponytail_migration[raw_content]" disabled="disabled"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="create_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Create File</button>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
 <script type='text/javascript'>
-  new Ponytail.Views.NewMigrationView({el: $(".pt_new")});
+  new Ponytail.Views.New({el: $(".new")}).render();
 </script>

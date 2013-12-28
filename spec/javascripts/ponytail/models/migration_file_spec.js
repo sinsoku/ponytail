@@ -4,7 +4,7 @@ describe("MigrationFile", function() {
       var mFile = new Ponytail.Models.MigrationFile({className: "CreateUsers"});
       spyOn(mFile, "getContentOfClass").andReturn("");
       var expected = [
-        "class CreateUsers < ActiveRecord::MigrationFile",
+        "class CreateUsers < ActiveRecord::Migration",
         "",
         "end",
       ].join("\n");

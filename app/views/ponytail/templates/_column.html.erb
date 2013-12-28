@@ -1,7 +1,7 @@
-<div class="pt_column">
-  <div class="pt_column_type">
-    <span><%= column.type %></span>
-    <select style="display: none;">
+<script type="text/template" id="column_template">
+  <div class="column_type">
+    <span><%%= type %></span>
+    <select>
       <option value="string">string</option>
       <option value="text">text</option>
       <option value="integer">integer</option>
@@ -15,8 +15,10 @@
       <option value="boolean">boolean</option>
     </select>
   </div>
-  <div class="pt_column_name">
-    <span><%= column.name %></span>
-    <input type="text" value="<%= column.name %>" style="display: none;" />
+  <div class="column_name">
+    <span><%%= name %></span>
+    <input type="text" value="<%%= name %>" />
   </div>
-</div>
+  <div class="remove_column"><a href="#">remove</a></div>
+  <div class="restore_column"><a href="#">restore</a></div>
+</script>
