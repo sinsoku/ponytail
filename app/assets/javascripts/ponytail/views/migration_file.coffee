@@ -22,6 +22,4 @@ class Ponytail.Views.MigrationFile extends Backbone.View
       @$(".raw_content textarea").attr("disabled", "disabled")
 
   clickCreateButton: ->
-    # TODO:
-    alert("coming soon...")
-    false
+    @.setRawContentEnabled(true)
