@@ -1,4 +1,5 @@
 class Ponytail.Views.Column extends Backbone.View
+  className: "column"
   events:
     "click .column_type": "clickColumnType"
     "change .column_type select": "changeColumnTypeSelect"
@@ -14,8 +15,12 @@ class Ponytail.Views.Column extends Backbone.View
     @model.bind("change", @render)
 
   render: =>
-    @$(".column_type span").text(@model.get("type"))
-    @$(".column_name span").text(@model.get("name"))
+    if @el.parentNode == null
+      $(@el).html(_.template($("#column_template").html(), @model.attributes))
+    else
+      @$(".column_type span").text(@model.get("type"))
+      @$(".column_name span").text(@model.get("name"))
+    @
 
   clickColumnType: ->
     if @$(".column_type span").is(":visible")
