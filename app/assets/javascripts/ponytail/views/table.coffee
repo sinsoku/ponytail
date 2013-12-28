@@ -1,8 +1,7 @@
 class Ponytail.Views.Table extends Backbone.View
   events:
     "click .edit_table": "clickEditTable"
-    "keyup .table_name input": (e) ->
-      @model.set({name: e.target.value})
+    "keyup .table_name input": "keyupTableNameInput"
     "blur  .table_name input": "blurTableName"
     "click .drop_table": "clickDropTable"
     "click .restore_table": "clickRestoreTable"
@@ -20,10 +19,16 @@ class Ponytail.Views.Table extends Backbone.View
       @$(".table_name input").toggle()
     false
 
-  blurTableName: (e) ->
+  keyupTableNameInput: (e) ->
     @model.set({name: e.target.value})
-    @$(".table_name span").toggle()
-    @$(".table_name input").toggle()
+    # 13(ENTER_KEY)
+    if e.which == 13
+      @.blurTableName()
+
+  blurTableName: ->
+    if @$(".table_name input").is(":visible")
+      @$(".table_name span").toggle()
+      @$(".table_name input").toggle()
 
   clickDropTable: ->
     @model.set({isDrop: true})

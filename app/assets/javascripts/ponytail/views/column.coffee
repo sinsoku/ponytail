@@ -1,10 +1,11 @@
 class Ponytail.Views.Column extends Backbone.View
   events:
     "click .column_type": "clickColumnType"
+    "change .column_type select": "changeColumnTypeSelect"
+    "keyup .column_type select": "keyupColumnTypeSelect"
     "blur  .column_type": "blurColumnType"
     "click .column_name": "clickColumnName"
-    "keyup .column_name input": (e) ->
-      @model.set({name: e.target.value})
+    "keyup .column_name input": "keyupColumnNameInput"
     "blur  .column_name": "blurColumnName"
     "click .remove_column": "clickRemoveColumn"
     "click .restore_column": "clickRestoreColumn"
@@ -22,8 +23,15 @@ class Ponytail.Views.Column extends Backbone.View
       @$(".column_type span").toggle()
       @$(".column_type select").toggle()
 
-  blurColumnType: (e) ->
+  changeColumnTypeSelect: (e) ->
     @model.set({type: e.target.value})
+
+  keyupColumnTypeSelect: (e) ->
+    # 13(ENTER_KEY)
+    if e.which == 13
+      @.blurColumnType()
+
+  blurColumnType: ->
     @$(".column_type span").toggle()
     @$(".column_type select").toggle()
 
@@ -32,9 +40,16 @@ class Ponytail.Views.Column extends Backbone.View
       @$(".column_name span").toggle()
       @$(".column_name input").toggle()
 
-  blurColumnName: (e) ->
-    @$(".column_name span").toggle()
-    @$(".column_name input").toggle()
+  keyupColumnNameInput: (e) ->
+    @model.set({name: e.target.value})
+    # 13(ENTER_KEY)
+    if e.which == 13
+      @.blurColumnName()
+
+  blurColumnName: ->
+    if @$(".column_name input").is(":visible")
+      @$(".column_name span").toggle()
+      @$(".column_name input").toggle()
 
   clickRemoveColumn: ->
     @model.set({isRemoved: true})
