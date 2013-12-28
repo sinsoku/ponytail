@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ponytail (0.3.0)
+    ponytail (0.4.0)
       coffee-rails (~> 4.0.0)
       compass-rails
       rails (~> 4.0.0)
