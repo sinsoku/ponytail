@@ -32,8 +32,9 @@ class Ponytail.Views.Column extends Backbone.View
       @.blurColumnType()
 
   blurColumnType: ->
-    @$(".column_type span").toggle()
-    @$(".column_type select").toggle()
+    if @$(".column_type select").is(":visible")
+      @$(".column_type span").toggle()
+      @$(".column_type select").toggle()
 
   clickColumnName: ->
     if @$(".column_name span").is(":visible")
