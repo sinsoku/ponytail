@@ -8,6 +8,7 @@
     <span>new</span>
   </div>
 
+  <% notice = @migration.errors.full_messages if @migration.errors.any? %>
   <% if notice %>
     <div class="notice">
       <div class="message"><%= notice %></div>
@@ -62,26 +63,28 @@
       <div class="new_table"><a href="#">New Table</a></div>
     </div>
 
-    <div class="migration_file">
-      <div class="migration_file_header">
-        <div class="classname">
-          <input type="text" value="NewMigration" />
+    <%= form_for @migration, url: migrations_path do |f| %>
+      <div class="migration_file">
+        <div class="migration_file_header">
+          <div class="classname">
+            <input type="text" name="ponytail_migration[name]" value="NewMigration" />
+          </div>
+
+          <div class="edit_checkbox">
+            <input type="checkbox" />
+            <span>edit</span>
+          </div>
         </div>
 
-        <div class="edit_checkbox">
-          <input type="checkbox" />
-          <span>edit</span>
+        <div class="raw_content">
+          <textarea name="ponytail_migration[raw_content]" disabled="disabled"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="create_button">Create File</button>
         </div>
       </div>
-
-      <div class="raw_content">
-        <textarea disabled="disabled"></textarea>
-      </div>
-
-      <div class="actions">
-        <button class="create_button">Create File</button>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
