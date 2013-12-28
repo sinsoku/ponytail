@@ -48,6 +48,8 @@ class Ponytail.Views.Table extends Backbone.View
     false
 
   clickAddColumn: ->
-    # TODO:
-    alert("coming soon...")
+    column = new Ponytail.Models.Column({table: @model, isAdded: true})
+    view = new Ponytail.Views.Column({model: column})
+    @$(".add_column").before(view.render().el)
+    @model.addColumn(column)
     false
