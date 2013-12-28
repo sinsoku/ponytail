@@ -7,6 +7,9 @@ class Ponytail.Views.New extends Backbone.View
     for el in @$(".table")
       table = new Ponytail.Models.Table({})
       new Ponytail.Views.Table({el: el, model: table})
+      for el2 in $(el).find(".column")
+        column = new Ponytail.Models.Column({table: table})
+        new Ponytail.Views.Column({el: el2, model: column})
     @
 
   closeNotice: ->
