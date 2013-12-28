@@ -3,6 +3,7 @@ class Ponytail.Views.MigrationFile extends Backbone.View
     "click .edit_checkbox input": "clickEditCheckbox"
     "keyup .classname input": (e) ->
       @model.set({className: e.target.value})
+    "click .create_button": "clickCreateButton"
 
   initialize: ->
     @model.bind("change", @render)
@@ -20,4 +21,7 @@ class Ponytail.Views.MigrationFile extends Backbone.View
     else
       @$(".raw_content textarea").attr("disabled", "disabled")
 
-
+  clickCreateButton: ->
+    # TODO:
+    alert("coming soon...")
+    false
