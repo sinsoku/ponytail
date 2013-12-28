@@ -13,7 +13,7 @@ class Ponytail.Models.MigrationFile extends Backbone.Model
 
   update: =>
     rawContent = [
-      "class #{@.get("className")} < ActiveRecord::MigrationFile",
+      "class #{@.get("className")} < ActiveRecord::Migration",
       @.getContentOfClass(),
       "end",
     ].join("\n")
