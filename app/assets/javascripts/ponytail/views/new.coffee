@@ -46,6 +46,13 @@ class Ponytail.Views.New extends Backbone.View
       columnsElem.slideDown()
 
   clickNewTable: ->
-    # TODO:
-    alert("coming soon...")
+    table = new Ponytail.Models.Table({isCreated: true})
+    @tables.push(table)
+    table.bind("change", =>
+      @migrationFile.updateByTables(@tables)
+    )
+    table.trigger("change")
+
+    view = new Ponytail.Views.Table({model: table})
+    @$(".new_table").before(view.render().el)
     false

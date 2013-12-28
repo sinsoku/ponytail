@@ -14,8 +14,13 @@ class Ponytail.Views.Column extends Backbone.View
     @model.bind("change", @render)
 
   render: =>
-    @$(".column_type span").text(@model.get("type"))
-    @$(".column_name span").text(@model.get("name"))
+    if @el.parentNode == null
+      console.log("add column")
+      # $(@el).html(_.template($("#column_template").html(), @model.attributes))
+    else
+      @$(".column_type span").text(@model.get("type"))
+      @$(".column_name span").text(@model.get("name"))
+    @
 
   clickColumnType: ->
     if @$(".column_type span").is(":visible")

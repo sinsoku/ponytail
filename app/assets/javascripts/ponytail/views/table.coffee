@@ -1,4 +1,5 @@
 class Ponytail.Views.Table extends Backbone.View
+  className: "table"
   events:
     "click .edit_table": "clickEditTable"
     "keyup .table_name input": "keyupTableNameInput"
@@ -11,7 +12,11 @@ class Ponytail.Views.Table extends Backbone.View
     @model.bind("change", @render)
 
   render: =>
-    @$(".table_name span").text(@model.get("name"))
+    if @el.parentNode == null
+      $(@el).html(_.template($("#table_template").html(), @model.attributes))
+    else
+      @$(".table_name span").text(@model.get("name"))
+    @
 
   clickEditTable: ->
     if @$(".table_name span").is(":visible")

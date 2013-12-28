@@ -1,0 +1,24 @@
+<script type="text/template" id="column_template">
+  <div class="column_type">
+    <span><%%= type %></span>
+    <select>
+      <option value="string">string</option>
+      <option value="text">text</option>
+      <option value="integer">integer</option>
+      <option value="float">float</option>
+      <option value="decimal">decimal</option>
+      <option value="datetime">datetime</option>
+      <option value="timestamp">timestamp</option>
+      <option value="time">time</option>
+      <option value="date">date</option>
+      <option value="binary">binary</option>
+      <option value="boolean">boolean</option>
+    </select>
+  </div>
+  <div class="column_name">
+    <span><%%= name %></span>
+    <input type="text" value="<%%= name %>" />
+  </div>
+  <div class="remove_column"><a href="#">remove</a></div>
+  <div class="restore_column"><a href="#">restore</a></div>
+</script>
