@@ -1,8 +1,12 @@
 class Ponytail.Views.Table extends Backbone.View
   events:
+    "click .edit_table": "clickEditTable"
     "click .drop_table": "clickDropTable"
     "click .restore_table": "clickRestoreTable"
     "click .add_column": "clickAddColumn"
+
+  clickEditTable: ->
+    false
 
   clickDropTable: ->
     @model.set({isDrop: true})

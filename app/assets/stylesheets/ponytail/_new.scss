@@ -52,12 +52,23 @@
           width: 100%;
           .column_type {
             width: 100px;
+            cursor: pointer;
+            &:hover {
+              background-color: cornsilk;
+            }
+            select {
+              display: none;
+            }
           }
           .column_name {
             @include box-flex(1);
-          }
-          .edit_column {
-            width: 40px;
+            cursor: pointer;
+            &:hover {
+              background-color: cornsilk;
+            }
+            input {
+              display: none;
+            }
           }
           .remove_column {
             width: 60px;

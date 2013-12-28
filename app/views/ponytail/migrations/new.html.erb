@@ -25,9 +25,26 @@
           <div class="columns">
             <% table.columns.each do |column| %>
               <div class="column">
-                <div class="column_type"><%= column.type %></div>
-                <div class="column_name"><%= column.name %></div>
-                <div class="edit_column"><a href="#">edit</a></div>
+                <div class="column_type">
+                  <span><%= column.type %></span>
+                  <select>
+                    <option value="string">string</option>
+                    <option value="text">text</option>
+                    <option value="integer">integer</option>
+                    <option value="float">float</option>
+                    <option value="decimal">decimal</option>
+                    <option value="datetime">datetime</option>
+                    <option value="timestamp">timestamp</option>
+                    <option value="time">time</option>
+                    <option value="date">date</option>
+                    <option value="binary">binary</option>
+                    <option value="boolean">boolean</option>
+                  </select>
+                </div>
+                <div class="column_name">
+                  <span><%= column.name %></span>
+                  <input type="text" value="<%= column.name %>" />
+                </div>
                 <div class="remove_column"><a href="#">remove</a></div>
                 <div class="restore_column"><a href="#">restore</a></div>
               </div>

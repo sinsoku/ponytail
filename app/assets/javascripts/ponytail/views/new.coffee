@@ -14,8 +14,8 @@ class Ponytail.Views.New extends Backbone.View
       new Ponytail.Views.Table({el: el, model: table})
       columns = []
       for el2 in $(el).find(".column")
-        column_type = $(el2).find(".column_type").text()
-        column_name = $(el2).find(".column_name").text()
+        column_type = $(el2).find(".column_type span").text()
+        column_name = $(el2).find(".column_name span").text()
         column = new Ponytail.Models.Column({table: table, type: column_type, name: column_name})
         new Ponytail.Views.Column({el: el2, model: column})
         columns.push(column)
