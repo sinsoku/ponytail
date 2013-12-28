@@ -46,8 +46,8 @@
       <button class="new_button">New</button>
     </div>
     <div class="migrate">
-      <button class="migrate_button">Migrate</button>
-      <button class="rollback_button">Rollback</button>
+      <button class="migrate_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Migrate</button>
+      <button class="rollback_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Rollback</button>
     </div>
   </div>
 </div>
