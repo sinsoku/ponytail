@@ -2,6 +2,7 @@ class Ponytail.Views.Table extends Backbone.View
   className: "table"
   events:
     "click .edit_table": "clickEditTable"
+    "click .table_name span": "clickEditTable"
     "keyup .table_name input": "keyupTableNameInput"
     "blur  .table_name input": "blurTableName"
     "click .drop_table": "clickDropTable"
