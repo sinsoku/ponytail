@@ -25,7 +25,9 @@ class Ponytail.Models.Column extends Backbone.Model
 
   getCommands: ->
     table = @.get("table")
-    if @.isRemoved()
+    if @.isRemoved() && @.isAdded()
+      []
+    else if @.isRemoved()
       [new Ponytail.Models.Command("remove_column", ":" + table.get("name"), ":" + @beforeName)]
     else if @.isAdded()
       [new Ponytail.Models.Command("add_column", ":" + table.get("name"), ":" + @.get("name"), ":" + @.get("type"))]
