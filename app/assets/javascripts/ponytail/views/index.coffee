@@ -1,6 +1,6 @@
 class Ponytail.Views.Index extends Backbone.View
   events:
-    "click .close": "closeNotice"
+    "click .close a": "closeNotice"
     "click .migration_files .filename": "clickFileName"
     "click .new_button": "clickNewButton"
     "click .migrate_button": "clickMigrateButton"

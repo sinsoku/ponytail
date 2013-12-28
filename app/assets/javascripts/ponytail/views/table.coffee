@@ -6,7 +6,7 @@ class Ponytail.Views.Table extends Backbone.View
     "blur  .table_name input": "blurTableName"
     "click .drop_table": "clickDropTable"
     "click .restore_table": "clickRestoreTable"
-    "click .add_column": "clickAddColumn"
+    "click .add_column a": "clickAddColumn"
 
   initialize: ->
     @model.bind("change", @render)

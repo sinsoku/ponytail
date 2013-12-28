@@ -1,8 +1,8 @@
 class Ponytail.Views.New extends Backbone.View
   events:
-    "click .close": "closeNotice"
+    "click .close a": "closeNotice"
     "click .table_name": "clickTableName"
-    "click .new_table": "clickNewTable"
+    "click .new_table a": "clickNewTable"
 
   initialize: ->
     @tables = []
