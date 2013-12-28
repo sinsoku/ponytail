@@ -1,12 +1,13 @@
 class Ponytail.Views.MigrationFile extends Backbone.View
   events:
     "click .edit_checkbox input": "clickEditCheckbox"
+    "keyup .classname input": (e) ->
+      @model.set({className: e.target.value})
 
   initialize: ->
     @model.bind("change", @render)
 
   render: =>
-    @$(".classname span").text(@model.get("className"))
     @$(".raw_content textarea").text(@model.get("rawContent"))
 
   clickEditCheckbox: ->

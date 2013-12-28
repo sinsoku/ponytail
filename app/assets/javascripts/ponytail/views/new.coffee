@@ -22,8 +22,10 @@ class Ponytail.Views.New extends Backbone.View
       table.set({columns: columns}, {silent: true})
       @tables.push(table)
 
-    @migrationFile = new Ponytail.Models.MigrationFile({})
+    class_name = @$(".classname input")[0].value
+    @migrationFile = new Ponytail.Models.MigrationFile({className: class_name})
     new Ponytail.Views.MigrationFile({el: @$(".migration_file"), model: @migrationFile})
+    @migrationFile.update()
 
     for table in @tables
       table.bind("change", =>
