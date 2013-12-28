@@ -2,6 +2,7 @@ class Ponytail.Views.New extends Backbone.View
   events:
     "click .close": "closeNotice"
     "click .table_name": "clickTableName"
+    "click .new_table": "clickNewTable"
 
   initialize: ->
     @tables = []
@@ -41,3 +42,8 @@ class Ponytail.Views.New extends Backbone.View
       columnsElem.slideUp()
     else
       columnsElem.slideDown()
+
+  clickNewTable: ->
+    # TODO:
+    alert("coming soon...")
+    false

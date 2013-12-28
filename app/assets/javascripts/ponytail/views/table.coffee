@@ -2,6 +2,7 @@ class Ponytail.Views.Table extends Backbone.View
   events:
     "click .drop_table": "clickDropTable"
     "click .restore_table": "clickRestoreTable"
+    "click .add_column": "clickAddColumn"
 
   clickDropTable: ->
     @model.set({isDrop: true})
@@ -13,4 +14,9 @@ class Ponytail.Views.Table extends Backbone.View
     @model.set({isDrop: false})
     @$(".drop_table").show()
     @$(".restore_table").hide()
+    false
+
+  clickAddColumn: ->
+    # TODO:
+    alert("coming soon...")
     false
