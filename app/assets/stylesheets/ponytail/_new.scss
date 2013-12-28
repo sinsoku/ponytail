@@ -17,6 +17,7 @@
       @include border-radius(5px);
       border: solid 1px #000;
       height: 500px;
+      overflow-x: hidden;
       overflow-y: auto;
 
       .table {
@@ -52,6 +53,7 @@
 
         .column {
           @extend .horizontal-box;
+          padding: 2px;
           width: 100%;
           .column_type {
             width: 100px;
