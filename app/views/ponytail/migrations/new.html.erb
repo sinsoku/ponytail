@@ -20,6 +20,7 @@
             <div class="table_name"><%= table.name %></div>
             <div class="edit_table"><a href="#">edit</a></div>
             <div class="drop_table"><a href="#">drop</a></div>
+            <div class="restore_table"><a href="#">restore</a></div>
           </div>
           <div class="columns">
             <% table.columns.each do |column| %>
@@ -28,6 +29,7 @@
                 <div class="column_name"><%= column.name %></div>
                 <div class="edit_column"><a href="#">edit</a></div>
                 <div class="remove_column"><a href="#">remove</a></div>
+                <div class="restore_column"><a href="#">restore</a></div>
               </div>
             <% end %>
             <div class="add_column"><a href="#">Add Column</a></div>
