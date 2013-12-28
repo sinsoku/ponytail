@@ -10,7 +10,7 @@ class Ponytail.Views.Column extends Backbone.View
     false
 
   clickRestoreColumn: ->
-    @model.set({isRemoved: true})
+    @model.set({isRemoved: false})
     @$(".remove_column").show()
     @$(".restore_column").hide()
     false
