@@ -17,7 +17,10 @@
       <% @schema.tables.each do |table| %>
         <div class="table">
           <div class="horizontal-box">
-            <div class="table_name"><%= table.name %></div>
+            <div class="table_name">
+              <span><%= table.name %></span>
+              <input type="text" value="<%= table.name %>" />
+            </div>
             <div class="edit_table"><a href="#">edit</a></div>
             <div class="drop_table"><a href="#">drop</a></div>
             <div class="restore_table"><a href="#">restore</a></div>

@@ -25,6 +25,9 @@
         padding: 3px;
         .table_name {
           @include box-flex(1);
+          input {
+            display: none;
+          }
         }
         .edit_table {
           width: 40px;

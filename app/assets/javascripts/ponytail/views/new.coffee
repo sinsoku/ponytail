@@ -9,7 +9,7 @@ class Ponytail.Views.New extends Backbone.View
 
   render: =>
     for el in @$(".table")
-      name = $(el).find('.table_name').text()
+      name = $(el).find('.table_name span').text()
       table = new Ponytail.Models.Table({name: name})
       new Ponytail.Views.Table({el: el, model: table})
       columns = []
