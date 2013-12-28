@@ -24,6 +24,7 @@
       }
 
       .filename {
+        padding: 2px;
         cursor: pointer;
         &:hover {
           background-color: cornsilk;
@@ -35,17 +36,24 @@
       }
     }
 
-    .migration_filename {
-      margin: 2px 0;
-    }
+    .migration_file {
+      .migration_filename {
+        margin: 2px 0;
+        padding: 2px;
 
-    .raw_content {
-      @include border-radius(5px);
-      background: whitesmoke;
-      padding: 5px;
+        &.highlight {
+          animation: highlight 1s 1;
+        }
+      }
+      .raw_content {
+        @include border-radius(5px);
+        background: whitesmoke;
+        margin-top: 2px;
+        padding: 5px;
 
-      pre {
-        margin: 5px 0;
+        pre {
+          margin: 5px 0;
+        }
       }
     }
   }

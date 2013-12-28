@@ -11,7 +11,11 @@ class Ponytail.Views.Index extends Backbone.View
     false
 
   clickFileName: (e) ->
-    @$(".migration_file .filename").text(e.target.innerHTML)
+    @$(".migration_file .migration_filename").text(e.target.innerHTML)
+    @$(".migration_file .migration_filename").removeClass("highlight")
+    setTimeout( ->
+      @$(".migration_file .migration_filename").addClass("highlight")
+    , 100)
     raw_content = $(e.target).parent().find(".raw_content").text()
     @$(".migration_file .raw_content pre").text(raw_content)
 

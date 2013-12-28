@@ -8,6 +8,11 @@
   @include box-orient(vertical);
 }
 
+@keyframes highlight {
+  0% { background-color: yellow; }
+  100% { background-color: white; }
+}
+
 .header {
   @include border-radius(5px);
   border: 1px solid #000;

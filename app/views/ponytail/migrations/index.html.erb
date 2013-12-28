@@ -34,7 +34,7 @@
     <div class="migration_file">
       <% migration = @migrations[0] %>
       <!-- TODO: fake it!(sub) -->
-      <div class="filename"><%= migration.filename.sub(path, "") %></div>
+      <div class="migration_filename"><%= migration.filename.sub(path, "") %></div>
       <div class="raw_content">
         <pre><%= migration.raw_content %></pre>
       </div>
