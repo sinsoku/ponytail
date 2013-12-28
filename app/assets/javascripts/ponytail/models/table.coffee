@@ -27,7 +27,8 @@ class Ponytail.Models.Table extends Backbone.Model
     if (@.isCreated() && @.isDrop())
       []
     else if (@.isCreated() && !@.isDrop())
-      [new Ponytail.Models.CreateTableCommand(@.get("name"), @.get("columns"))]
+      columns = (column for column in @.get("columns") when !column.isRemoved())
+      [new Ponytail.Models.CreateTableCommand(@.get("name"), columns)]
     else if (!@.isCreated() && @.isDrop())
       [new Ponytail.Models.DropTableCommand(@.beforeName)]
     else
@@ -35,8 +36,7 @@ class Ponytail.Models.Table extends Backbone.Model
       if @.isRename()
         commands.push(new Ponytail.Models.RenameTableCommand(@beforeName, @.get("name")))
 
-      @.get("columns").forEach((column) ->
+      for column in @.get("columns")
         commands.push(column.getCommands())
-      )
 
       _.compact(_.flatten(commands))
