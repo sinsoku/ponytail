@@ -23,7 +23,7 @@ module Ponytail
     describe "#create.json" do
       context "valid params" do
         before do
-          Migration.any_instance.stub(:save).and_return(true)
+          Migration.any_instance.stub(save: true)
           post :create, ponytail_migration: migration_attributes, format: :json
         end
         it { expect(response).to be_success }
@@ -32,8 +32,8 @@ module Ponytail
 
       context "invalid params" do
         before do
-          Migration.any_instance.stub(:valid?).and_return(false)
-          Migration.any_instance.stub(:errors).and_return(['error'])
+          Migration.any_instance.stub(valid?: false)
+          Migration.any_instance.stub(errors: ['error'])
           post :create, ponytail_migration: migration_attributes, format: :json
         end
         it { expect(response).to be_client_error }
@@ -44,7 +44,7 @@ module Ponytail
     describe "#destroy.json" do
       context "valid params" do
         before do
-          Migration.any_instance.stub(:destroy).and_return(true)
+          Migration.any_instance.stub(destroy: true)
           Migration.stub(find: Migration.new)
           delete :destroy, id: "1", format: :json
         end
@@ -54,7 +54,7 @@ module Ponytail
 
       context "invalid params" do
         before do
-          Migration.any_instance.stub(:destroy).and_return(false)
+          Migration.any_instance.stub(destroy: false)
           delete :destroy, id: "invalid", format: :json
         end
         it { expect(response).to be_client_error }

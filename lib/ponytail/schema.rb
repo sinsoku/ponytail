@@ -1,7 +1,17 @@
 module Ponytail
   class Schema
+    include ActiveModel::Model
+    attr_reader :version
+
     def tables
       table_names.sort.map { |t| Table.new(t) }
+    end
+
+    def update(attrs)
+    end
+
+    def as_json(attrs)
+      {}
     end
 
     private
