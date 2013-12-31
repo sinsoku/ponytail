@@ -3,23 +3,23 @@ class Ponytail.Views.MigrationFile extends Backbone.View
     "click .edit_checkbox input": "clickEditCheckbox"
     "keyup .classname input": (e) ->
       @model.set({className: e.target.value})
-    "click .create_button": "clickCreateButton"
+    "keyup .raw_content textarea": (e) ->
+      @model.set({rawContent: e.target.value})
 
   initialize: ->
     @model.bind("change", @render)
 
   render: =>
-    @$(".raw_content textarea").text(@model.get("rawContent"))
+    @$(".raw_content pre code").text(@model.get("rawContent"))
+    if !(@$(".raw_content textarea").is(":visible"))
+      @$(".raw_content textarea").val(@model.get("rawContent"))
+    @highlightCode()
+    @
+
+  highlightCode: ->
+    for el in $('pre code')
+      hljs.highlightBlock(el)
 
   clickEditCheckbox: ->
-    disabled = @$(".raw_content textarea").is(":disabled")
-    @.setRawContentEnabled(disabled)
-
-  setRawContentEnabled: (enabled) ->
-    if enabled
-      @$(".raw_content textarea").removeAttr("disabled")
-    else
-      @$(".raw_content textarea").attr("disabled", "disabled")
-
-  clickCreateButton: ->
-    @.setRawContentEnabled(true)
+    @$(".raw_content pre").toggle()
+    @$(".raw_content textarea").toggle()

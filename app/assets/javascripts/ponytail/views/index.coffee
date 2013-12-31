@@ -6,6 +6,14 @@ class Ponytail.Views.Index extends Backbone.View
     "click .migrate_button": "clickMigrateButton"
     "click .rollback_button": "clickRollbackButton"
 
+  render: ->
+    @highlightCode()
+    @
+
+  highlightCode: ->
+    for el in $('pre code')
+      hljs.highlightBlock(el)
+
   closeNotice: ->
     $(".notice").hide()
     false
@@ -17,7 +25,8 @@ class Ponytail.Views.Index extends Backbone.View
       @$(".migration_file .migration_filename").addClass("highlight")
     , 100)
     raw_content = $(e.target).parent().find(".raw_content").text()
-    @$(".migration_file .raw_content pre").text(raw_content)
+    @$(".migration_file .raw_content pre code").text(raw_content)
+    @highlightCode()
 
   clickNewButton: ->
     window.location.href = "migrations/new"
