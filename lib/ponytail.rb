@@ -1,7 +1,7 @@
 require 'ponytail/engine'
 require 'ponytail/migration'
 require 'ponytail/schema'
-require 'rails/mapper'
+require 'ponytail/routing/mapper'
 
 require 'sass-rails'
 require 'compass-rails'
