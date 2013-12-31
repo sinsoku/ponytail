@@ -42,7 +42,8 @@
         padding: 2px;
 
         &.highlight {
-          animation: highlight 1s 1;
+          @include animation(highlight 1s 1);
+          // animation: highlight 1s 1;
         }
       }
       .raw_content {
