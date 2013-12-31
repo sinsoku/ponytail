@@ -29,6 +29,16 @@ module Ponytail
         last = all.last
         ActiveRecord::Migration.next_migration_number(last ? last.version + 1 : 0).to_i
       end
+
+      def create(attrs)
+        migration = new(attrs)
+        migration.save
+        migration
+      end
+
+      def find(id)
+        all.select { |x| x.version == id }.first
+      end
     end
 
     def filename_only
@@ -52,6 +62,11 @@ module Ponytail
 
     def destroy
       File.delete(filename)
+    end
+
+    def as_json(attrs)
+      # TODO, WIP:
+      {}
     end
   end
 end

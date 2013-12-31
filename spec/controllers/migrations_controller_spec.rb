@@ -2,90 +2,63 @@ require 'spec_helper'
 
 module Ponytail
   describe MigrationsController do
-    # let(:controller) { MigrationsController.new }
-
-    describe "#index" do
-      before do
-        Migration.stub(:all)
-        Migration.stub(:current_version)
-        controller.index
-      end
-      it { expect(controller).to be_instance_variable_defined(:@migrations) }
-      it { expect(controller).to be_instance_variable_defined(:@current_version) }
+    def migration_attributes
+      {
+        ponytail_migration: {}
+      }
     end
 
-    describe "#new" do
-       before do
-         Migration.stub(:new)
-         controller.new
-       end
-       it { expect(controller).to be_instance_variable_defined(:@migration) }
+    describe "#index.html" do
+      before { get :index }
+      it { expect(response).to be_success }
+      it { expect(response.status).to eq(200) } # ok
     end
 
-    describe "#create" do
-      context "save was succeed." do
+    describe "#new.html" do
+      before { get :new }
+      it { expect(response).to be_success }
+      it { expect(response.status).to eq(200) } # ok
+    end
+
+    describe "#create.json" do
+      context "valid params" do
         before do
-          @migration = Migration.new
-          @migration.stub(save: true)
-          Migration.stub(new: @migration)
-          controller.stub(migraion_params: {})
-          controller.should_receive(:redirect_to).with(:migrations, notice: 'Migration was successfully created.')
-          controller.create
+          Migration.any_instance.stub(:save).and_return(true)
+          post :create, ponytail_migration: migration_attributes, format: :json
         end
-        it "redirect to migrations, and notice" do end
-        it { expect(controller).to be_instance_variable_defined(:@migration) }
+        it { expect(response).to be_success }
+        it { expect(response.status).to eq(201) } # created
       end
-      context "save was failed." do
+
+      context "invalid params" do
         before do
-          @migration = Migration.new
-          @migration.stub(save: false)
-          Migration.stub(new: @migration)
-          controller.stub(migraion_params: {})
-          controller.should_receive(:render).with(action: :new)
-          controller.create
+          Migration.any_instance.stub(:valid?).and_return(false)
+          Migration.any_instance.stub(:errors).and_return(['error'])
+          post :create, ponytail_migration: migration_attributes, format: :json
         end
-        it "redirect to migrations, and notice" do end
-        it { expect(controller).to be_instance_variable_defined(:@migration) }
+        it { expect(response).to be_client_error }
+        it { expect(response.status).to eq(422) } # unprocessable entity
       end
     end
 
-    describe "#migrate" do
-      context "migrate was succeed." do
+    describe "#destroy.json" do
+      context "valid params" do
         before do
-          Migration.stub(migrate: true)
-          controller.should_receive(:redirect_to).with(:migrations, notice: 'Migrate was succeed.')
-          controller.migrate
+          Migration.any_instance.stub(:destroy).and_return(true)
+          Migration.stub(find: Migration.new)
+          delete :destroy, id: "1", format: :json
         end
-        it "redirect to migrations, and notice" do end
+        it { expect(response).to be_success }
+        it { expect(response.status).to eq(204) } # no content
       end
 
-      context "migrate was failed." do
+      context "invalid params" do
         before do
-          Migration.stub(migrate: false)
-          controller.should_receive(:redirect_to).with(:migrations, notice: 'Migrate was failed.')
-          controller.migrate
+          Migration.any_instance.stub(:destroy).and_return(false)
+          delete :destroy, id: "invalid", format: :json
         end
-        it "redirect to migrations, and notice" do end
-      end
-    end
-
-    describe "#rollback" do
-      context "rollback was succeed." do
-        before do
-          Migration.stub(rollback: true)
-          controller.should_receive(:redirect_to).with(:migrations, notice: 'Rollback was succeed.')
-          controller.rollback
-        end
-        it "redirect to migrations, and notice" do end
-      end
-
-      context "rollback was failed." do
-        before do
-          Migration.stub(rollback: false)
-          controller.should_receive(:redirect_to).with(:migrations, notice: 'Rollback was failed.')
-          controller.rollback
-        end
-        it "redirect to migrations, and notice" do end
+        it { expect(response).to be_client_error }
+        it { expect(response.status).to eq(404) } # not found
       end
     end
   end
