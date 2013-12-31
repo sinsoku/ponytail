@@ -61,9 +61,5 @@
 
   .actions {
     @extend .horizontal-box;
-
-    .migrate {
-      margin-left: 10px;
-    }
   }
 }

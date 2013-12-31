@@ -2,7 +2,7 @@
   <div class="header">
     <span>index</span>
     <span>|</span>
-    <a href="/rails/migrations/new">new</a>
+    <a href="/ponytail/migrations/new">new</a>
   </div>
 
   <% if notice %>
@@ -40,10 +40,6 @@
   <div class="actions">
     <div>
       <button class="new_button">New</button>
-    </div>
-    <div class="migrate">
-      <button class="migrate_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Migrate</button>
-      <button class="rollback_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Rollback</button>
     </div>
   </div>
 </div>
