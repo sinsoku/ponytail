@@ -14,16 +14,13 @@
 
   <div class="container">
     <div>
-      <!-- TODO: fake it! -->
-      <% path = 'db/migrate/' %>
-      <div class="migration_filepath"><%= path %></div>
+      <div class="migration_filepath"><%= "#{Ponytail::Migration.migrations_path}/" %></div>
       <div class="migration_files">
         <table>
           <% @migrations.each do |migration| %>
             <tr>
               <td><%= migration.version == @current_version ? "*" : "" %></td>
-              <!-- TODO: fake it!(sub) -->
-              <td class="filename"><%= migration.filename.sub(path, "") %></td>
+              <td class="filename"><%= migration.filename_only %></td>
               <td class="raw_content"><%= migration.raw_content %></td>
             </tr>
           <% end %>
@@ -33,8 +30,7 @@
 
     <div class="migration_file">
       <% migration = @migrations[0] %>
-      <!-- TODO: fake it!(sub) -->
-      <div class="migration_filename"><%= migration.filename.sub(path, "") %></div>
+      <div class="migration_filename"><%= migration.filename_only %></div>
       <div class="raw_content">
         <pre><code><%= migration.raw_content %></code></pre>
       </div>

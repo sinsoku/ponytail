@@ -31,6 +31,11 @@ module Ponytail
       end
     end
 
+    def filename_only
+      # TODO, WIP:
+      filename.sub("#{Ponytail::Migration.migrations_path}/", "")
+    end
+
     def raw_content
       @raw_content ||= (filename != nil ? open(filename).read : nil)
     end
