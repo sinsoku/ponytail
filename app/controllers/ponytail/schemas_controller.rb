@@ -1,6 +1,11 @@
 module Ponytail
   class SchemasController < ActionController::Base
-    respond_to :json, only: :update
+    respond_to :json, only: [:show, :update]
+
+    def show
+      @schema = Schema.new
+      respond_with @schema
+    end
 
     def update
       # TODO, WIP:

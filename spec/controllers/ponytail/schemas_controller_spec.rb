@@ -2,12 +2,21 @@ require 'spec_helper'
 
 module Ponytail
   describe SchemasController do
-    describe "#update.json" do
-      def schema_attributes
-        {
-          ponytail_schema: {}
-        }
+    def schema_attributes
+      {
+        ponytail_schema: {}
+      }
+    end
+
+    describe "#show.json" do
+      before do
+        get :show, format: :json
       end
+      it { expect(response).to be_success }
+      it { expect(response.status).to eq(200) } # ok
+    end
+
+    describe "#update.json" do
 
       context "valid params" do
         before do
