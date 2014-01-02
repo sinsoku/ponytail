@@ -46,7 +46,7 @@ $ rails s
 
 Dummy app is deploying on heroku. However, you can not change the migration files and databases.
 
-http://ponytail.herokuapp.com/rails/migrations
+http://ponytail.herokuapp.com/
 
 ## Contributing
 
