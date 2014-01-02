@@ -65,8 +65,12 @@ module Ponytail
     end
 
     def as_json(attrs)
-      # TODO, WIP:
-      {}
+      {
+        name: name,
+        filename: filename,
+        version: version,
+        raw_content: raw_content
+      }
     end
   end
 end

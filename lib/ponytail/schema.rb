@@ -8,10 +8,13 @@ module Ponytail
     end
 
     def update(attrs)
+      # TODO: migrationの処理
     end
 
     def as_json(attrs)
-      {}
+      {
+        version: version
+      }
     end
 
     private
