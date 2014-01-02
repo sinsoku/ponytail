@@ -32,7 +32,7 @@ Comment out `config.active_record.migration_error` in `config/environments/devel
 
 ## Usage
 
-Visit `/rails/migrations` in your app.
+Visit `/ponytail/migrations` in your app.
 
 ## How to work dummy app
 
