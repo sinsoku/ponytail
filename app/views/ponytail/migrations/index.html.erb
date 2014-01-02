@@ -48,8 +48,16 @@
       <button class="new_button">New</button>
     </div>
     <div class="migrate">
-      <button class="migrate_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Migrate</button>
-      <button class="rollback_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Rollback</button>
+      <% if !Ponytail::Migration.check_pending? %>
+        <button class="migrate_button">Migrate</button>
+      <% else %>
+        <button class="migrate_button" disabled="disabled">Migrate</button>
+      <% end %>
+      <% if !Ponytail::Migration.check_pending? && !@migrations[0].current? %>
+        <button class="rollback_button">Rollback</button>
+      <% else %>
+        <button class="rollback_button" disabled="disabled">Rollback</button>
+      <% end %>
     </div>
   </div>
 </div>
