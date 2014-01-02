@@ -17,14 +17,6 @@ module Ponytail
       end
       delegate :migrations_paths, :migrations_path, :current_version, to: ActiveRecord::Migrator
 
-      def migrate
-        ActiveRecord::Migrator.migrate(migrations_paths)
-      end
-
-      def rollback
-        ActiveRecord::Migrator.rollback(migrations_paths)
-      end
-
       def next_version
         last = all.last
         ActiveRecord::Migration.next_migration_number(last ? last.version + 1 : 0).to_i
