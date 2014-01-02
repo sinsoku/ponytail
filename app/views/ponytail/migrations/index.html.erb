@@ -2,7 +2,7 @@
   <div class="header">
     <span>index</span>
     <span>|</span>
-    <a href="/rails/migrations/new">new</a>
+    <a href="/ponytail/migrations/new">new</a>
   </div>
 
   <% if notice %>
@@ -18,9 +18,15 @@
       <div class="migration_files">
         <table>
           <% @migrations.each do |migration| %>
-            <tr>
-              <td><%= migration.version == @current_version ? "*" : "" %></td>
+            <% if migration.current? %>
+              <tr class="current">
+                <td>*</td>
+            <% else %>
+              <tr>
+                <td></td>
+            <% end %>
               <td class="filename"><%= migration.filename_only %></td>
+              <td class="version"><%= migration.version %></td>
               <td class="raw_content"><%= migration.raw_content %></td>
             </tr>
           <% end %>

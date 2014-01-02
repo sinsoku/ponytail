@@ -5,6 +5,7 @@ class Ponytail.Views.MigrationFile extends Backbone.View
       @model.set({className: e.target.value})
     "keyup .raw_content textarea": (e) ->
       @model.set({rawContent: e.target.value})
+    "click .create_button": "clickCreateButton"
 
   initialize: ->
     @model.bind("change", @render)
@@ -23,3 +24,14 @@ class Ponytail.Views.MigrationFile extends Backbone.View
   clickEditCheckbox: ->
     @$(".raw_content pre").toggle()
     @$(".raw_content textarea").toggle()
+
+  clickCreateButton: ->
+    $.ajax
+      dataType: 'json'
+      url: '/ponytail/migrations'
+      data:
+        ponytail_migration:
+          name: @model.get("className")
+          raw_content: @model.get("rawContent")
+      type: 'POST'
+      success: -> window.location.href = "/ponytail/migrations"

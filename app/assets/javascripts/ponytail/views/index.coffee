@@ -32,7 +32,24 @@ class Ponytail.Views.Index extends Backbone.View
     window.location.href = "migrations/new"
 
   clickMigrateButton: ->
-    window.location.href = "migrations/migrate"
+    latest_version = $("tr:last .version").text()
+    $.ajax
+      dataType: 'json'
+      url: '/ponytail/schema'
+      data:
+        ponytail_schema:
+          version: latest_version
+      type: 'PATCH'
+      success: () -> window.location.href = "/ponytail/migrations"
 
   clickRollbackButton: ->
-    window.location.href = "migrations/rollback"
+    rollback_index = $("tr").index($(".current"))
+    rollback_version = $("tr:eq(#{rollback_index - 1}) .version").text()
+    $.ajax
+      dataType: 'json'
+      url: '/ponytail/schema'
+      data:
+        ponytail_schema:
+          version: rollback_version
+      type: 'PATCH'
+      success: -> window.location.href = "/ponytail/migrations"

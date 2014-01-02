@@ -1,10 +1,11 @@
 module Ponytail
   class MigrationsController < ActionController::Base
     layout 'ponytail/application'
+    respond_to :html, only: [:index, :new]
+    respond_to :json, only: [:create, :destroy]
 
     def index
       @migrations = Migration.all
-      @current_version = Migration.current_version
     end
 
     def new
@@ -13,36 +14,17 @@ module Ponytail
     end
 
     def create
-      @migration = Migration.new(migraion_params)
-
-      if @migration.save
-        redirect_to :migrations, notice: 'Migration was successfully created.'
-      else
-        @schema = Schema.new
-        render action: :new
-      end
+      @migration = Migration.create(migraion_params)
+      respond_with @migration
     end
 
     def destroy
-      # TODO: fix params[:id]
-      @migration = Migration.all.select { |x| x.version == params[:id].to_i }.first
-      @migration.destroy
-      redirect_to :migrations, notice: 'Migration was successfully deleted.'
-    end
-
-    def migrate
-      if Migration.migrate
-        redirect_to :migrations, notice: 'Migrate was succeed.'
+      @migration = Migration.find(params[:id])
+      if @migration
+        @migration.destroy
+        respond_with @migration
       else
-        redirect_to :migrations, notice: 'Migrate was failed.'
-      end
-    end
-
-    def rollback
-      if Migration.rollback
-        redirect_to :migrations, notice: 'Rollback was succeed.'
-      else
-        redirect_to :migrations, notice: 'Rollback was failed.'
+        render nothing: true, status: 404
       end
     end
 

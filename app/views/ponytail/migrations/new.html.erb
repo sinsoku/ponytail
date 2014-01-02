@@ -3,7 +3,7 @@
 
 <div class="new">
   <div class="header">
-    <a href="/rails/migrations">index</a>
+    <a href="/ponytail/migrations">index</a>
     <span>|</span>
     <span>new</span>
   </div>
@@ -63,29 +63,27 @@
       <div class="new_table"><a href="#">New Table</a></div>
     </div>
 
-    <%= form_for @migration, url: migrations_path do |f| %>
-      <div class="migration_file">
-        <div class="migration_file_header">
-          <div class="classname">
-            <input type="text" name="ponytail_migration[name]" value="NewMigration" />
-          </div>
-
-          <div class="edit_checkbox">
-            <input type="checkbox" />
-            <span>edit</span>
-          </div>
+    <div class="migration_file">
+      <div class="migration_file_header">
+        <div class="classname">
+          <input type="text" value="NewMigration" />
         </div>
 
-        <div class="raw_content">
-          <pre><code></code></pre>
-          <textarea name="ponytail_migration[raw_content]"></textarea>
-        </div>
-
-        <div class="actions">
-          <button class="create_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Create File</button>
+        <div class="edit_checkbox">
+          <input type="checkbox" />
+          <span>edit</span>
         </div>
       </div>
-    <% end %>
+
+      <div class="raw_content">
+        <pre><code></code></pre>
+        <textarea></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="create_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Create File</button>
+      </div>
+    </div>
   </div>
 </div>
 
