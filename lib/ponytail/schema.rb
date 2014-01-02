@@ -20,7 +20,7 @@ module Ponytail
 
     private
     def table_names
-      ActiveRecord::Base.connection.tables.delete_if { |t| t == 'schema_migrations' }
+      ActiveRecord::Base.connection.tables.delete_if { |t| t == ActiveRecord::SchemaMigration.table_name }
     end
   end
 
