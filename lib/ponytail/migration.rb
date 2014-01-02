@@ -64,6 +64,10 @@ module Ponytail
       File.delete(filename)
     end
 
+    def current?
+      version == Migration.current_version
+    end
+
     def as_json(attrs)
       {
         name: name,

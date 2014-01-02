@@ -18,9 +18,15 @@
       <div class="migration_files">
         <table>
           <% @migrations.each do |migration| %>
-            <tr>
-              <td><%= migration.version == @current_version ? "*" : "" %></td>
+            <% if migration.current? %>
+              <tr class="current">
+                <td>*</td>
+            <% else %>
+              <tr>
+                <td></td>
+            <% end %>
               <td class="filename"><%= migration.filename_only %></td>
+              <td class="version"><%= migration.version %></td>
               <td class="raw_content"><%= migration.raw_content %></td>
             </tr>
           <% end %>
@@ -40,6 +46,10 @@
   <div class="actions">
     <div>
       <button class="new_button">New</button>
+    </div>
+    <div class="migrate">
+      <button class="migrate_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Migrate</button>
+      <button class="rollback_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Rollback</button>
     </div>
   </div>
 </div>

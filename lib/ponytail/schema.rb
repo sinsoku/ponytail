@@ -8,7 +8,8 @@ module Ponytail
     end
 
     def update(attrs)
-      # TODO: migrationの処理
+      @version = attrs["version"].to_i
+      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
     end
 
     def as_json(attrs)
