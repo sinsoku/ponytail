@@ -22,18 +22,18 @@
         <div class="table">
           <div class="horizontal-box">
             <div class="table_name">
-              <span><%= table.name %></span>
-              <input type="text" value="<%= table.name %>" />
+              <span><%= table[:name] %></span>
+              <input type="text" value="<%= table[:name] %>" />
             </div>
             <div class="edit_table"><a href="#">edit</a></div>
             <div class="drop_table"><a href="#">drop</a></div>
             <div class="restore_table"><a href="#">restore</a></div>
           </div>
           <div class="columns">
-            <% table.columns.each do |column| %>
+            <% table[:columns].each do |column| %>
               <div class="column">
                 <div class="column_type">
-                  <span><%= column.type %></span>
+                  <span><%= column[:type] %></span>
                   <select>
                     <option value="string">string</option>
                     <option value="text">text</option>
@@ -49,8 +49,8 @@
                   </select>
                 </div>
                 <div class="column_name">
-                  <span><%= column.name %></span>
-                  <input type="text" value="<%= column.name %>" />
+                  <span><%= column[:name] %></span>
+                  <input type="text" value="<%= column[:name] %>" />
                 </div>
                 <div class="remove_column"><a href="#">remove</a></div>
                 <div class="restore_column"><a href="#">restore</a></div>
