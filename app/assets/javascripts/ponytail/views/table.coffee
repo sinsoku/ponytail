@@ -1,4 +1,6 @@
 class Ponytail.Views.Table extends Backbone.View
+  template: ->
+    _.template($("#table_template").html(), @model.attributes)
   className: "table"
   events:
     "click .edit_table": "clickEditTable"
@@ -14,7 +16,7 @@ class Ponytail.Views.Table extends Backbone.View
 
   render: =>
     if @el.parentNode == null
-      $(@el).html(_.template($("#table_template").html(), @model.attributes))
+      $(@el).html(@template())
     else
       @$(".table_name span").text(@model.get("name"))
     @
