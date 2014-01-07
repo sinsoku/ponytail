@@ -20,7 +20,7 @@ module Ponytail
     end
 
     def destroy
-      @migration = Migration.find(params[:id])
+      @migration = Migration.find(params[:id].to_i)
       if @migration
         @migration.destroy
         flash[:notice] = "Migration was successfully deleted."
