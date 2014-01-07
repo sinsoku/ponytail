@@ -12,16 +12,7 @@ module Ponytail
       table_names.sort.map do |t|
         {
           name: t,
-          columns: columns_of(t)
-        }
-      end
-    end
-
-    def columns_of(table)
-      ActiveRecord::Base.connection.columns(table).map do |column|
-        {
-          type: column.type,
-          name: column.name
+          columns: ActiveRecord::Base.connection.columns(t)
         }
       end
     end
