@@ -19,7 +19,7 @@ class Ponytail.Views.MigrationsNew extends Backbone.View
 
         class_name = @$(".classname input")[0].value
         @migrationFile = new Ponytail.Models.MigrationFile({className: class_name})
-        new Ponytail.Views.MigrationFile({el: @$(".migration_file"), model: @migrationFile})
+        new Ponytail.Views.PreviewCreateFile({el: @$(".migration_file"), model: @migrationFile})
         @migrationFile.update()
 
         for table in @tables
