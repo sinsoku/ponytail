@@ -17,6 +17,14 @@ class Ponytail.Views.Table extends Backbone.View
   render: =>
     if @el.parentNode == null
       $(@el).html(@template())
+      columns = []
+      for column_attrs in @model.get('columns')
+        column_attrs.table = @model
+        m = new Ponytail.Models.Column(column_attrs)
+        v = new Ponytail.Views.Column({model: m})
+        @$(".add_column").before(v.render().el)
+        columns.push(m)
+      @model.set({columns: columns}, {silent: true})
     else
       @$(".table_name span").text(@model.get("name"))
     @
