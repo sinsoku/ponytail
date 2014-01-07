@@ -2,7 +2,7 @@
   <div class="header">
     <span>index</span>
     <span>|</span>
-    <a href="/rails/migrations/new">new</a>
+    <a href="/ponytail/migrations/new">new</a>
   </div>
 
   <% if notice %>
@@ -13,18 +13,22 @@
   <% end %>
 
   <div class="container">
-    <div>
-      <!-- TODO: fake it! -->
-      <% path = 'db/migrate/' %>
-      <div class="migration_filepath"><%= path %></div>
+    <div class="left_div">
+      <div class="migration_filepath"><%= "#{Ponytail::Migration.migrations_path}/" %></div>
       <div class="migration_files">
         <table>
           <% @migrations.each do |migration| %>
-            <tr>
-              <td><%= migration.version == @current_version ? "*" : "" %></td>
-              <!-- TODO: fake it!(sub) -->
-              <td class="filename"><%= migration.filename.sub(path, "") %></td>
+            <% if migration.current? %>
+              <tr class="current">
+                <td>*</td>
+            <% else %>
+              <tr>
+                <td></td>
+            <% end %>
+              <td class="filename"><%= migration.filename_only %></td>
+              <td class="version"><%= migration.version %></td>
               <td class="raw_content"><%= migration.raw_content %></td>
+              <td class="delete_file"><a href="#">x</a></td>
             </tr>
           <% end %>
         </table>
@@ -33,10 +37,9 @@
 
     <div class="migration_file">
       <% migration = @migrations[0] %>
-      <!-- TODO: fake it!(sub) -->
-      <div class="migration_filename"><%= migration.filename.sub(path, "") %></div>
+      <div class="migration_filename"><%= migration.filename_only %></div>
       <div class="raw_content">
-        <pre><%= migration.raw_content %></pre>
+        <pre><code><%= migration.raw_content %></code></pre>
       </div>
     </div>
   </div>
@@ -46,12 +49,20 @@
       <button class="new_button">New</button>
     </div>
     <div class="migrate">
-      <button class="migrate_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Migrate</button>
-      <button class="rollback_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Rollback</button>
+      <% if !Ponytail::Migration.check_pending? %>
+        <button class="migrate_button">Migrate</button>
+      <% else %>
+        <button class="migrate_button" disabled="disabled">Migrate</button>
+      <% end %>
+      <% if !Ponytail::Migration.check_pending? && !@migrations[0].current? %>
+        <button class="rollback_button">Rollback</button>
+      <% else %>
+        <button class="rollback_button" disabled="disabled">Rollback</button>
+      <% end %>
     </div>
   </div>
 </div>
 
 <script type='text/javascript'>
-  new Ponytail.Views.Index({el: $(".index")}).render();
+  new Ponytail.Views.MigrationsIndex({el: $(".index")}).render();
 </script>

@@ -32,7 +32,7 @@ Comment out `config.active_record.migration_error` in `config/environments/devel
 
 ## Usage
 
-Visit `/rails/migrations` in your app.
+Visit `/ponytail/migrations` in your app.
 
 ## How to work dummy app
 
@@ -46,7 +46,7 @@ $ rails s
 
 Dummy app is deploying on heroku. However, you can not change the migration files and databases.
 
-http://ponytail.herokuapp.com/rails/migrations
+http://ponytail.herokuapp.com/
 
 ## Contributing
 

@@ -1,27 +1,37 @@
 module Ponytail
   class Schema
+    include ActiveModel::Model
+    attr_accessor :version, :tables
+
+    def initialize(params={})
+      super(params)
+      @version = ActiveRecord::Migrator.current_version
+    end
+
     def tables
-      table_names.sort.map { |t| Table.new(t) }
+      table_names.sort.map do |t|
+        {
+          name: t,
+          columns: ActiveRecord::Base.connection.columns(t)
+        }
+      end
+    end
+
+    def update(attrs)
+      @version = attrs["version"].to_i
+      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
+    end
+
+    def as_json(attrs)
+      {
+        version: version,
+        tables: tables
+      }
     end
 
     private
     def table_names
-      ActiveRecord::Base.connection.tables.delete_if { |t| t == 'schema_migrations' }
-    end
-  end
-
-  class Table
-    attr_reader :name
-    def initialize(name=nil)
-      @name = name
-    end
-
-    def columns
-      @columns ||= ActiveRecord::Base.connection.columns(name)
-    end
-
-    def ==(other)
-      name == other.name
+      ActiveRecord::Base.connection.tables.delete_if { |t| t == ActiveRecord::SchemaMigration.table_name }
     end
   end
 end

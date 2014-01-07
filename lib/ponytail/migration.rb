@@ -17,18 +17,25 @@ module Ponytail
       end
       delegate :migrations_paths, :migrations_path, :current_version, to: ActiveRecord::Migrator
 
-      def migrate
-        ActiveRecord::Migrator.migrate(migrations_paths)
-      end
-
-      def rollback
-        ActiveRecord::Migrator.rollback(migrations_paths)
-      end
-
       def next_version
         last = all.last
         ActiveRecord::Migration.next_migration_number(last ? last.version + 1 : 0).to_i
       end
+
+      def create(attrs)
+        migration = new(attrs)
+        migration.save
+        migration
+      end
+
+      def find(id)
+        all.select { |x| x.version == id }.first
+      end
+    end
+
+    def filename_only
+      # TODO, WIP:
+      filename.sub("#{Ponytail::Migration.migrations_path}/", "")
     end
 
     def raw_content
@@ -47,6 +54,19 @@ module Ponytail
 
     def destroy
       File.delete(filename)
+    end
+
+    def current?
+      version == Migration.current_version
+    end
+
+    def as_json(attrs)
+      {
+        name: name,
+        filename: filename,
+        version: version,
+        raw_content: raw_content
+      }
     end
   end
 end

@@ -6,7 +6,8 @@
   .container {
     @extend .horizontal-box;
 
-    > div {
+    // TODO: bad style name
+    .left_div {
       @include box-flex(1);
       margin: 0 2px;
     }
@@ -31,26 +32,25 @@
         }
       }
 
+      .version,
       .raw_content {
         display: none;
       }
     }
 
     .migration_file {
+      width: 500px;
+      margin: 0 2px;
+
       .migration_filename {
         margin: 2px 0;
         padding: 2px;
 
         &.highlight {
-          animation: highlight 1s 1;
+          @include animation(highlight 1s 1);
         }
       }
       .raw_content {
-        @include border-radius(5px);
-        background: whitesmoke;
-        margin-top: 2px;
-        padding: 5px;
-
         pre {
           margin: 5px 0;
         }
@@ -62,7 +62,7 @@
     @extend .horizontal-box;
 
     .migrate {
-      margin-left: 10px;
+       margin-left: 10px;
     }
   }
 }
