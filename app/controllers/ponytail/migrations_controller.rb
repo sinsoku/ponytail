@@ -15,6 +15,7 @@ module Ponytail
 
     def create
       @migration = Migration.create(migraion_params)
+      flash[:notice] = "Migration was successfully created."
       respond_with @migration
     end
 
@@ -22,6 +23,7 @@ module Ponytail
       @migration = Migration.find(params[:id])
       if @migration
         @migration.destroy
+        flash[:notice] = "Migration was successfully deleted."
         respond_with @migration
       else
         render nothing: true, status: 404

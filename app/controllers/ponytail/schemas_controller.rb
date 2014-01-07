@@ -11,8 +11,10 @@ module Ponytail
       # TODO, WIP:
       @schema = Schema.new
       if @schema.update(schema_params)
+        flash[:notice] = "Schema was successfully updated."
         render json: @schema, status: :ok
       else
+        flash[:notice] = "Schema update was failed."
         render json: @schema, status: :bad_request
       end
     end
