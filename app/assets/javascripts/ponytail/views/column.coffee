@@ -1,4 +1,6 @@
 class Ponytail.Views.Column extends Backbone.View
+  template: ->
+    _.template($("#column_template").html(), @model.attributes)
   className: "column"
   events:
     "click .column_type": "clickColumnType"
@@ -16,7 +18,7 @@ class Ponytail.Views.Column extends Backbone.View
 
   render: =>
     if @el.parentNode == null
-      $(@el).html(_.template($("#column_template").html(), @model.attributes))
+      $(@el).html(@template())
     else
       @$(".column_type span").text(@model.get("type"))
       @$(".column_name span").text(@model.get("name"))

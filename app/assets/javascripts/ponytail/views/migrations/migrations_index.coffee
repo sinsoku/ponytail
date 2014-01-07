@@ -1,7 +1,8 @@
-class Ponytail.Views.Index extends Backbone.View
+class Ponytail.Views.MigrationsIndex extends Backbone.View
   events:
     "click .close a": "closeNotice"
     "click .migration_files .filename": "clickFileName"
+    "click .delete_file": "clickDeleteFile"
     "click .new_button": "clickNewButton"
     "click .migrate_button": "clickMigrateButton"
     "click .rollback_button": "clickRollbackButton"
@@ -27,6 +28,16 @@ class Ponytail.Views.Index extends Backbone.View
     raw_content = $(e.target).parent().find(".raw_content").text()
     @$(".migration_file .raw_content pre code").text(raw_content)
     @highlightCode()
+
+  clickDeleteFile: (e) ->
+    if confirm('Are you sure?')
+      version = $(e.target).parent().parent().find(".version").text()
+      $.ajax
+        dataType: 'json'
+        url: "/ponytail/migrations/#{version}"
+        type: 'DELETE'
+        success: -> window.location.href = "/ponytail/migrations"
+    false
 
   clickNewButton: ->
     window.location.href = "migrations/new"

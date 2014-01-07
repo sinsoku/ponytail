@@ -1,4 +1,4 @@
-class Ponytail.Views.MigrationFile extends Backbone.View
+class Ponytail.Views.PreviewCreateFile extends Backbone.View
   events:
     "click .edit_checkbox input": "clickEditCheckbox"
     "keyup .classname input": (e) ->
