@@ -1,4 +1,4 @@
-class Ponytail.Views.Index extends Backbone.View
+class Ponytail.Views.MigrationsIndex extends Backbone.View
   events:
     "click .close a": "closeNotice"
     "click .migration_files .filename": "clickFileName"

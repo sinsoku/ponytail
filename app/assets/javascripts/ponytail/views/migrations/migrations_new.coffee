@@ -1,4 +1,4 @@
-class Ponytail.Views.New extends Backbone.View
+class Ponytail.Views.MigrationsNew extends Backbone.View
   events:
     "click .close a": "closeNotice"
     "click .table_name": "clickTableName"
