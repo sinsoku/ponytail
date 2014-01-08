@@ -1,4 +1,4 @@
-class Ponytail.Models.MigrationFile extends Backbone.Model
+class Ponytail.Models.Migration extends Backbone.Model
   defaults:
     className: ""
     rawContent: ""
