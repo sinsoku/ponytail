@@ -5,7 +5,13 @@ class Ponytail.Models.Migration extends Backbone.Model
 
   initialize: (attrs, options) ->
     @tables = []
+    @attributes["basename"] = @baseName()
     @.bind("change:className", @.update)
+
+  baseName: ->
+    filename = @get("filename")
+    if filename
+      filename.split('/').pop()
 
   updateByTables: (tables) ->
     @tables = tables

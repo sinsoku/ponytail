@@ -1,3 +1,5 @@
+<%= render 'ponytail/templates/migrations_item' %>
+
 <div class="index">
   <div class="header">
     <span>index</span>
@@ -17,20 +19,8 @@
       <div class="migration_filepath"><%= "#{Ponytail::Migration.migrations_path}/" %></div>
       <div class="migration_files">
         <table>
-          <% @migrations.each do |migration| %>
-            <% if migration.current? %>
-              <tr class="current">
-                <td>*</td>
-            <% else %>
-              <tr>
-                <td></td>
-            <% end %>
-              <td class="filename"><%= migration.filename_only %></td>
-              <td class="version"><%= migration.version %></td>
-              <td class="raw_content"><%= migration.raw_content %></td>
-              <td class="delete_file"><a href="#">x</a></td>
-            </tr>
-          <% end %>
+          <tbody>
+          </tbody>
         </table>
       </div>
     </div>
