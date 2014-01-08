@@ -2,10 +2,11 @@ module Ponytail
   class MigrationsController < ActionController::Base
     layout 'ponytail/application'
     respond_to :html, only: [:index, :new]
-    respond_to :json, only: [:create, :destroy]
+    respond_to :json, only: [:index, :create, :destroy]
 
     def index
       @migrations = Migration.all
+      respond_with @migrations
     end
 
     def new
