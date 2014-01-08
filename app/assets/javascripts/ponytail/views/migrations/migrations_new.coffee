@@ -17,8 +17,8 @@ class Ponytail.Views.MigrationsNew extends Backbone.View
           @$(".new_table").before(v.render().el)
           @tables.push(m)
 
-        class_name = @$(".classname input")[0].value
-        @migration = new Ponytail.Models.Migration({className: class_name})
+        name = @$(".classname input")[0].value
+        @migration = new Ponytail.Models.Migration({name: name})
         new Ponytail.Views.PreviewCreateFile({el: @$(".migration_file"), model: @migration})
         @migration.update()
 
