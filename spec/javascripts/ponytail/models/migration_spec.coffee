@@ -1,7 +1,7 @@
-describe "MigrationFile", ->
+describe "Migration", ->
   describe "#update", ->
     it "should be able to set rawContent", ->
-      mFile = new Ponytail.Models.MigrationFile({className: "CreateUsers"})
+      mFile = new Ponytail.Models.Migration({className: "CreateUsers"})
       spyOn(mFile, "getContentOfClass").andReturn("")
       expected = [
         "class CreateUsers < ActiveRecord::Migration",
