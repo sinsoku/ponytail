@@ -27,7 +27,9 @@ class Ponytail.Views.MigrationsIndex extends Backbone.View
               else
                 $(el).prepend("<td></td>")
 
-    @highlightCode()
+        v = new Ponytail.Views.PreviewMigration({model: @migrations.head()})
+        @$(".migration_file").replaceWith(v.render().el)
+        @highlightCode()
     @
 
   highlightCode: ->

@@ -1,4 +1,5 @@
 <%= render 'ponytail/templates/migrations_item' %>
+<%= render 'ponytail/templates/preview_migration' %>
 
 <div class="index">
   <div class="header">
@@ -25,13 +26,7 @@
       </div>
     </div>
 
-    <div class="migration_file">
-      <% migration = @migrations[0] %>
-      <div class="migration_filename"><%= migration.filename_only %></div>
-      <div class="raw_content">
-        <pre><code><%= migration.raw_content %></code></pre>
-      </div>
-    </div>
+    <div class="migration_file"></div>
   </div>
 
   <div class="actions">
