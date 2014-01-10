@@ -30,7 +30,7 @@ class Ponytail.Models.Migration extends Backbone.Model
   getContentOfClass: ->
     _.compact([
       "def change",
-      @.getStringOfCommands(),
+      @getStringOfCommands(),
       "end",
     ]).join("\n").replace(/^/, "  ").replace(/\n/g, "\n  ")
 
