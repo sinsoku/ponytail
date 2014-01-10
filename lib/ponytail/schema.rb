@@ -12,7 +12,8 @@ module Ponytail
       table_names.sort.map do |t|
         {
           name: t,
-          columns: ActiveRecord::Base.connection.columns(t)
+          columns: ActiveRecord::Base.connection.columns(t),
+          indexes: ActiveRecord::Base.connection.indexes(t)
         }
       end
     end

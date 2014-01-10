@@ -17,14 +17,14 @@ class Ponytail.Views.MigrationsNew extends Backbone.View
           @$(".new_table").before(v.render().el)
           @tables.push(m)
 
-        class_name = @$(".classname input")[0].value
-        @migrationFile = new Ponytail.Models.MigrationFile({className: class_name})
-        new Ponytail.Views.PreviewCreateFile({el: @$(".migration_file"), model: @migrationFile})
-        @migrationFile.update()
+        name = @$(".classname input")[0].value
+        @migration = new Ponytail.Models.Migration({name: name})
+        new Ponytail.Views.PreviewCreateFile({el: @$(".migration_file"), model: @migration})
+        @migration.update()
 
         for table in @tables
           table.bind("change", =>
-            @migrationFile.updateByTables(@tables)
+            @migration.updateByTables(@tables)
           )
     @
 
@@ -44,7 +44,7 @@ class Ponytail.Views.MigrationsNew extends Backbone.View
     table = new Ponytail.Models.Table({isCreated: true})
     @tables.push(table)
     table.bind("change", =>
-      @migrationFile.updateByTables(@tables)
+      @migration.updateByTables(@tables)
     )
     table.trigger("change")
 
