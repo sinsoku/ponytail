@@ -34,12 +34,12 @@
       <button class="new_button">New</button>
     </div>
     <div class="migrate">
-      <% if !Ponytail::Migration.check_pending? %>
+      <% if Ponytail.config.update_schema? %>
         <button class="migrate_button">Migrate</button>
       <% else %>
         <button class="migrate_button" disabled="disabled">Migrate</button>
       <% end %>
-      <% if !Ponytail::Migration.check_pending? && !@migrations[0].current? %>
+      <% if Ponytail.config.update_schema? && !@migrations[0].current? %>
         <button class="rollback_button">Rollback</button>
       <% else %>
         <button class="rollback_button" disabled="disabled">Rollback</button>
