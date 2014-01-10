@@ -39,7 +39,11 @@
       </div>
 
       <div class="actions">
-        <button class="create_button" <%= Ponytail::Migration.check_pending? ? 'disabled="disabled"' : '' %>>Create File</button>
+        <% if Ponytail.config.update_schema? %>
+          <button class="create_button">Create File</button>
+        <% else %>
+          <button class="create_button" disabled="disabled">Create File</button>
+        <% end %>
       </div>
     </div>
   </div>

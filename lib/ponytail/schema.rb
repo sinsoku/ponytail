@@ -20,7 +20,11 @@ module Ponytail
 
     def update(attrs)
       @version = attrs["version"].to_i
-      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
+      if Ponytail.config.update_schema?
+        ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
+      else
+        false
+      end
     end
 
     def as_json(attrs)
