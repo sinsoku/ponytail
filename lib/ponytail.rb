@@ -6,3 +6,4 @@ require 'ponytail/routing/mapper'
 
 require 'sass-rails'
 require 'compass-rails'
+require 'font/awesome/sass'

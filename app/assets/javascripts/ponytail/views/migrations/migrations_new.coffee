@@ -2,7 +2,7 @@ class Ponytail.Views.MigrationsNew extends Backbone.View
   events:
     "click .close a": "closeNotice"
     "click .table_name": "clickTableName"
-    "click .new_table a": "clickNewTable"
+    "click .new_table": "clickNewTable"
 
   initialize: ->
     @tables = []

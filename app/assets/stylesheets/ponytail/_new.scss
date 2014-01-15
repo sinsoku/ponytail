@@ -27,19 +27,20 @@
             display: none;
           }
         }
-        .edit_table {
-          width: 40px;
+        .edit_table i,
+        .drop_table i,
+        .restore_table i {
+          cursor: pointer;
+          margin: 0 2px;
         }
-        .drop_table {
-          width: 40px;
-        }
+
         .restore_table {
-          width: 60px;
           display: none;
         }
       }
 
       .new_table {
+        cursor: pointer;
         padding: 3px;
         margin-top: 3px;
       }
@@ -72,16 +73,18 @@
               display: none;
             }
           }
-          .remove_column {
-            width: 60px;
+          .remove_column i,
+          .restore_column i {
+            cursor: pointer;
+            margin: 0 2px;
           }
           .restore_column {
-            width: 60px;
             display: none;
           }
         }
 
         .add_column {
+          cursor: pointer;
           margin-top: 3px;
         }
       }
