@@ -49,7 +49,7 @@ module Ponytail
     end
 
     def destroy
-      if Ponytail.config.delegate?
+      if Ponytail.config.delete_migration?
         File.delete(filename)
       else
         false
