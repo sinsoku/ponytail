@@ -77,4 +77,10 @@ Dummy::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  Ponytail.configure do |config|
+    config.update_schema = false
+    config.create_migration = false
+    config.delete_migration = false
+  end
 end

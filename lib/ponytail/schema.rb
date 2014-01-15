@@ -12,14 +12,19 @@ module Ponytail
       table_names.sort.map do |t|
         {
           name: t,
-          columns: ActiveRecord::Base.connection.columns(t)
+          columns: ActiveRecord::Base.connection.columns(t),
+          indexes: ActiveRecord::Base.connection.indexes(t)
         }
       end
     end
 
     def update(attrs)
       @version = attrs["version"].to_i
-      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
+      if Ponytail.config.update_schema?
+        ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
+      else
+        false
+      end
     end
 
     def as_json(attrs)

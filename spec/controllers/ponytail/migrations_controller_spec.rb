@@ -20,6 +20,12 @@ module Ponytail
       it { expect(response.status).to eq(200) } # ok
     end
 
+    describe "#index.json" do
+      before { get :index, format: :json }
+      it { expect(response).to be_success }
+      it { expect(response.status).to eq(200) } # ok
+    end
+
     describe "#create.json" do
       context "valid params" do
         before do

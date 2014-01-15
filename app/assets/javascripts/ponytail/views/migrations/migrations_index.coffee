@@ -7,8 +7,29 @@ class Ponytail.Views.MigrationsIndex extends Backbone.View
     "click .migrate_button": "clickMigrateButton"
     "click .rollback_button": "clickRollbackButton"
 
-  render: ->
-    @highlightCode()
+  initialize: ->
+    @migrations = new Ponytail.Collections.Migrations()
+    @schema = new Ponytail.Models.Schema()
+
+  render: =>
+    @migrations.fetch
+      success: =>
+        @migrations.each (model) ->
+          v = new Ponytail.Views.MigrationsItem({model: model})
+          @$(".migration_files table tbody").append(v.render().el)
+
+        @schema.fetch
+          success: =>
+            for el in @$("tr")
+              version = $(el).find(".version").text()
+              if parseInt(version) == @schema.get("version")
+                $(el).prepend("<td>*</td>")
+              else
+                $(el).prepend("<td></td>")
+
+        v = new Ponytail.Views.PreviewMigration({model: @migrations.head()})
+        @$(".migration_file").replaceWith(v.render().el)
+        @highlightCode()
     @
 
   highlightCode: ->

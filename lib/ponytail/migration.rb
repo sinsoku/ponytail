@@ -7,10 +7,6 @@ module Ponytail
     validates :raw_content, presence: true
 
     class << self
-      def check_pending?
-        ActiveRecord::VERSION::MAJOR >= 4 && Rails.application.config.middleware.include?(ActiveRecord::Migration::CheckPending)
-      end
-
       def all
         proxys = ActiveRecord::Migrator.migrations(migrations_paths)
         proxys.map { |p| new(name: p.name, filename: p.filename, version: p.version) }
@@ -43,7 +39,7 @@ module Ponytail
     end
 
     def save
-      if valid?
+      if valid? && Ponytail.config.create_migration?
         next_filename = "#{Migration.migrations_path}/#{Migration.next_version}_#{name.underscore}.rb"
         open(next_filename, 'w') { |f| f.write(raw_content) }
         true
@@ -53,7 +49,11 @@ module Ponytail
     end
 
     def destroy
-      File.delete(filename)
+      if Ponytail.config.delete_migration?
+        File.delete(filename)
+      else
+        false
+      end
     end
 
     def current?
