@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require underscore-min
 //= require backbone-min
+//= require backbone.stickit.min
 //= require highlight.pack
 //= require ./ponytail
 //= require_tree ./models
