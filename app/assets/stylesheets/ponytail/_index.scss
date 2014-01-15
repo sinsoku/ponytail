@@ -36,6 +36,10 @@
       .raw_content {
         display: none;
       }
+
+      .delete_file {
+        cursor: pointer;
+      }
     }
 
     .migration_file {
