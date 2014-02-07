@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202142714) do
+ActiveRecord::Schema.define(version: 20140207170410) do
 
   create_table "books", force: true do |t|
-    t.string   "title"
+    t.string   "title",      limit: 100,                         default: "no title", null: false
     t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price",                  precision: 5, scale: 2
   end
 
   create_table "users", force: true do |t|
@@ -26,5 +27,7 @@ ActiveRecord::Schema.define(version: 20131202142714) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["name"], name: "index_users_on_name", unique: true
 
 end
