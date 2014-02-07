@@ -16,6 +16,7 @@ src_files:
   - vendor/assets/javascripts/jquery_ujs.js
   - vendor/assets/javascripts/underscore-min.js
   - vendor/assets/javascripts/backbone-min.js
+  - vendor/assets/javascripts/backbone.marionette.min.js
   - vendor/assets/javascripts/backbone.stickit.min.js
   - app/assets/javascripts/ponytail/ponytail.coffee
   - app/assets/javascripts/ponytail/**/*.{js,coffee}
