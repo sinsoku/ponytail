@@ -1,0 +1,40 @@
+<%= render 'ponytail/share/header' %>
+
+<h1>Migrations</h1>
+
+<p>
+  <strong>Current:</strong>
+  <%= @schema.current_version %>
+</p>
+
+<table class="ponytail_migrations">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Migration ID</th>
+      <th>Migration Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @migrations.each do |migration| %>
+      <tr>
+        <td><%= migration.status %></td>
+        <td><%= migration.version %></td>
+        <td><%= migration.description %></td>
+        <td><%= link_to 'Destroy', migration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for @schema, url: {controller: :schema, action: :update} do |f| %>
+  <%= f.hidden_field :version, value: @schema.last_version %>
+  <%= f.submit 'Migrate' %>
+<% end %>
+
+<%= form_for @schema, url: {controller: :schema, action: :update} do |f| %>
+  <%= f.hidden_field :version, value: @schema.rollback_version %>
+  <%= f.submit 'Rollback' %>
+<% end %>

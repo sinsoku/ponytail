@@ -1,0 +1,37 @@
+<%= render 'ponytail/share/header' %>
+
+<h1>New Migrations</h1>
+
+<%= form_for(@migration) do |f| %>
+  <% if @migration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@migration.errors.count, "error") %> prohibited this migration from being saved:</h2>
+
+      <ul>
+      <% @migration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :version %><br>
+    <%= f.text_field :version, readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :filename %><br>
+    <%= f.text_field :filename, readonly: true %>
+  </div>
+  <pre>
+    <code class="ruby"><%= @migration.raw_content %></code>
+  </pre>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

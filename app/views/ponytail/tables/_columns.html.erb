@@ -1,0 +1,37 @@
+<h3>Columns</h3>
+
+<table class="ponytail_columns">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>SqlType</th>
+      <th>Null</th>
+      <th>Limit</th>
+      <th>Precision</th>
+      <th>Scale</th>
+      <th>Default</th>
+      <th>DefaultFunction</th>
+      <th>Primary</th>
+      <th>Coder</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% columns.each do |column| %>
+      <tr>
+        <td><%= column.type %></td>
+        <td><%= column.name %></td>
+        <td><%= column.sql_type %></td>
+        <td><%= column.null %></td>
+        <td><%= column.limit %></td>
+        <td><%= column.precision %></td>
+        <td><%= column.scale %></td>
+        <td><%= column.default %></td>
+        <td><%= column.default_function %></td>
+        <td><%= column.primary %></td>
+        <td><%= column.coder %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

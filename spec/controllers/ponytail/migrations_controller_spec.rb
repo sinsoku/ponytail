@@ -1,71 +1,49 @@
 require 'spec_helper'
 
 module Ponytail
-  describe MigrationsController do
+  describe MigrationsController, type: :controller do
     def migration_attributes
       {
-        ponytail_migration: {}
+        name: '',
+        raw_content: ''
       }
     end
 
-    describe "#index.html" do
+    describe "#index" do
       before { get :index }
       it { expect(response).to be_success }
-      it { expect(response.status).to eq(200) } # ok
     end
 
-    describe "#new.html" do
+    describe "#new" do
       before { get :new }
       it { expect(response).to be_success }
-      it { expect(response.status).to eq(200) } # ok
     end
 
-    describe "#index.json" do
-      before { get :index, format: :json }
-      it { expect(response).to be_success }
-      it { expect(response.status).to eq(200) } # ok
-    end
-
-    describe "#create.json" do
+    describe "#create" do
       context "valid params" do
         before do
           Migration.any_instance.stub(save: true)
-          post :create, ponytail_migration: migration_attributes, format: :json
+          post :create, ponytail_migration: migration_attributes
         end
-        it { expect(response).to be_success }
-        it { expect(response.status).to eq(201) } # created
+        it { expect(response).to redirect_to ponytail_migrations_url }
       end
 
       context "invalid params" do
         before do
-          Migration.any_instance.stub(valid?: false)
-          Migration.any_instance.stub(errors: ['error'])
-          post :create, ponytail_migration: migration_attributes, format: :json
+          Migration.any_instance.stub(save: false)
+          post :create, ponytail_migration: migration_attributes
         end
-        it { expect(response).to be_client_error }
-        it { expect(response.status).to eq(422) } # unprocessable entity
+        it { expect(response).to render_template :new }
       end
     end
 
-    describe "#destroy.json" do
-      context "valid params" do
-        before do
-          Migration.any_instance.stub(destroy: true)
-          Migration.stub(find: Migration.new)
-          delete :destroy, id: "1", format: :json
-        end
-        it { expect(response).to be_success }
-        it { expect(response.status).to eq(204) } # no content
+    describe "#destroy" do
+      before do
+        Migration.stub(find: Migration.new)
+        Migration.any_instance.stub(:destroy)
+        delete :destroy, id: "1"
       end
-
-      context "invalid params" do
-        before do
-          Migration.any_instance.stub(destroy: false)
-          delete :destroy, id: "invalid", format: :json
-        end
-        it { expect(response).to be_client_error }
-        it { expect(response.status).to eq(404) } # not found
-      end
+      it { expect(response).to redirect_to ponytail_migrations_url }
     end
   end
 end

@@ -1,0 +1,31 @@
+<h3>Indexes</h3>
+
+<table class="ponytail_indexes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Columns</th>
+      <th>Unique</th>
+      <th>Lengths</th>
+      <th>Orders</th>
+      <th>Where</th>
+      <th>Type</th>
+      <th>Using</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% indexes.each do |index| %>
+      <tr>
+        <td><%= index.name %></td>
+        <td><%= index.columns.join(',') %></td>
+        <td><%= index.unique %></td>
+        <td><%= index.lengths %></td>
+        <td><%= index.orders %></td>
+        <td><%= index.where %></td>
+        <td><%= index.type %></td>
+        <td><%= index.using %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

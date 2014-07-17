@@ -20,8 +20,10 @@ require 'ponytail'
 
 require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'capybara/rspec'
+require 'capybara/rails'
 Capybara.app = Dummy::Application
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 app_dir = File.expand_path('../../app', __FILE__)
 Dir.glob("#{app_dir}/**/*.rb").each { |f| require f }

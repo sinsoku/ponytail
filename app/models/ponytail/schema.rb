@@ -1,11 +1,28 @@
 module Ponytail
   class Schema
     include ActiveModel::Model
-    attr_accessor :version, :tables
 
-    def initialize(params={})
-      super(params)
-      @version = ActiveRecord::Migrator.current_version
+    delegate_methods = [
+      :current_version,
+      :last_version,
+      :get_all_versions,
+      :schema_migrations_table_name
+    ]
+    delegate(*delegate_methods, to: ActiveRecord::Migrator)
+    delegate :table_name, to: ActiveRecord::SchemaMigration
+
+    class << self
+      def first
+        @schema ||= new
+      end
+    end
+
+    def persisted?
+      ActiveRecord::Base.connection.table_exists? table_name
+    end
+
+    def rollback_version
+      get_all_versions.reverse.find { |x| x < current_version }
     end
 
     def tables
@@ -19,24 +36,17 @@ module Ponytail
     end
 
     def update(attrs)
-      @version = attrs["version"].to_i
       if Ponytail.config.update_schema?
+        @version = attrs["version"].to_i
         ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, @version)
       else
         false
       end
     end
 
-    def as_json(attrs)
-      {
-        version: version,
-        tables: tables
-      }
-    end
-
     private
     def table_names
-      ActiveRecord::Base.connection.tables.delete_if { |t| t == ActiveRecord::SchemaMigration.table_name }
+      ActiveRecord::Base.connection.tables.delete_if { |t| t == table_name }
     end
   end
 end

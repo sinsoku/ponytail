@@ -1,0 +1,13 @@
+<%= render 'ponytail/share/header' %>
+
+<h1>Tables</h1>
+
+<%= render 'table_name' %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @table.name %>
+</p>
+
+<%= render 'columns', columns: @table.columns %>
+<%= render 'indexes', indexes: @table.indexes %>

@@ -1,39 +1,39 @@
 module Ponytail
   class MigrationsController < ActionController::Base
     layout 'ponytail/application'
-    respond_to :html, only: [:index, :new]
-    respond_to :json, only: [:index, :create, :destroy]
 
     def index
+      @schema = Schema.first
       @migrations = Migration.all
-      respond_with @migrations
     end
 
     def new
-      @migration = Migration.new
-      @schema = Schema.new
+      @migration = schema_change.to_migration
     end
 
     def create
-      @migration = Migration.create(migraion_params)
-      flash[:notice] = "Migration was successfully created."
-      respond_with @migration
+      @migration = Migration.new(migraion_params)
+
+      if @migration.save
+        redirect_to ponytail_migrations_url, notice: 'Migration was successfully created.'
+      else
+        render action: 'new'
+      end
     end
 
     def destroy
-      @migration = Migration.find(params[:id].to_i)
-      if @migration
-        @migration.destroy
-        flash[:notice] = "Migration was successfully deleted."
-        respond_with @migration
-      else
-        render nothing: true, status: 404
-      end
+      @migration = Migration.find(params[:id])
+      @migration.destroy
+      redirect_to ponytail_migrations_url, notice: 'Migration was successfully deleted.'
     end
 
     private
     def migraion_params
       params.require(:ponytail_migration).permit(:name, :raw_content)
+    end
+
+    def schema_change
+      @schema_change ||= SchemaChange.load(session[:schema_change])
     end
   end
 end

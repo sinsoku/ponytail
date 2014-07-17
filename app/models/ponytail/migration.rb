@@ -1,15 +1,20 @@
 module Ponytail
   class Migration
     include ActiveModel::Model
-    attr_accessor :name, :filename, :version, :raw_content
+    attr_accessor :name, :filename, :version, :raw_content, :status
+    alias :id :version
 
     validates :name, presence: true
     validates :raw_content, presence: true
 
     class << self
       def all
+        db_list = ActiveRecord::Base.connection.select_values("SELECT version FROM #{ActiveRecord::Migrator.schema_migrations_table_name}")
         proxys = ActiveRecord::Migrator.migrations(migrations_paths)
-        proxys.map { |p| new(name: p.name, filename: p.filename, version: p.version) }
+        proxys.map do |p|
+          status = db_list.delete(p.version.to_s) ? 'up' : 'down'
+          new(name: p.name, filename: p.filename, version: p.version, status: status)
+        end
       end
       delegate :migrations_paths, :migrations_path, :current_version, to: ActiveRecord::Migrator
 
@@ -18,14 +23,25 @@ module Ponytail
         ActiveRecord::Migration.next_migration_number(last ? last.version + 1 : 0).to_i
       end
 
-      def create(attrs)
-        migration = new(attrs)
-        migration.save
-        migration
+      def find(id)
+        all.find { |x| x.version == id.to_i }
       end
 
-      def find(id)
-        all.select { |x| x.version == id }.first
+      def load(migration)
+        migration.nil? ? new : migration
+      end
+    end
+
+    def persisted?
+      filename.present?
+    end
+
+    def description
+      # TODO
+      if match_data = /(\d{3,})_(.+)\.rb$/.match(filename)
+        match_data[2].humanize
+      else
+        '********** NO FILE **********'
       end
     end
 
@@ -58,15 +74,6 @@ module Ponytail
 
     def current?
       version == Migration.current_version
-    end
-
-    def as_json(attrs)
-      {
-        name: name,
-        filename: filename,
-        version: version,
-        raw_content: raw_content
-      }
     end
   end
 end
