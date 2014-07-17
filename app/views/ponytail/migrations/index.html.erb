@@ -39,7 +39,7 @@
       <% else %>
         <button class="migrate_button" disabled="disabled">Migrate</button>
       <% end %>
-      <% if Ponytail.config.update_schema? && !@migrations[0].current? %>
+      <% if Ponytail.config.update_schema? && !@migrations[0].try(:current?) %>
         <button class="rollback_button">Rollback</button>
       <% else %>
         <button class="rollback_button" disabled="disabled">Rollback</button>

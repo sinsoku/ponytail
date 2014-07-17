@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Ponytail
-  describe SchemasController do
+  describe SchemaController do
     def schema_attributes
       {
         ponytail_schema: {}

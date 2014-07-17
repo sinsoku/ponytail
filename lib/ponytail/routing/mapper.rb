@@ -3,7 +3,8 @@ module ActionDispatch::Routing
     def mount_ponytail
       namespace :ponytail do
         resources :migrations, only: [:index, :new, :create, :destroy]
-        resource :schema, only: [:show, :update]
+        resources :tables, only: [:index, :show], path: :schema, as: :schema
+        resource :schema, only: :update, controller: :schema
       end
     end
   end
