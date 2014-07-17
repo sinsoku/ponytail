@@ -1,9 +1,8 @@
 require 'active_record'
 require 'action_controller'
 require 'rails/engine'
-require 'sass-rails'
 require 'coffee-rails'
-require 'compass-rails'
+require 'sass-rails'
 
 require 'ponytail/routing/mapper'
 require 'ponytail/config'
