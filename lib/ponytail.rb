@@ -1,9 +1,10 @@
-require 'ponytail/engine'
-require 'ponytail/migration'
-require 'ponytail/schema'
-require 'ponytail/config'
-require 'ponytail/routing/mapper'
-
+require 'active_record'
+require 'action_controller'
+require 'rails/engine'
 require 'sass-rails'
+require 'coffee-rails'
 require 'compass-rails'
-require 'font/awesome/sass'
+
+require 'ponytail/routing/mapper'
+require 'ponytail/config'
+require 'ponytail/engine'
