@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.2'
 
 # Specify your gem's dependencies in ponytail.gemspec
 gemspec
