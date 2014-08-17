@@ -19,5 +19,5 @@ deploy:
     repo: sinsoku/ponytail
     branch: develop
   run:
-    - "rake db:migrate"
+    - "rake db:migrate:reset"
     - restart
