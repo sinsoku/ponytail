@@ -14,6 +14,7 @@ group :development do
   gem 'terminal-notifier-guard'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'launchy'
 end
 
 group :development, :test do
@@ -22,6 +23,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rubocop'
+  gem 'phantomjs'
+  gem 'poltergeist'
 end
 
 group :test do
