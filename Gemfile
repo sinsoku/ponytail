@@ -9,9 +9,6 @@ gem 'rake'
 
 group :development do
   gem 'byebug'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'terminal-notifier-guard'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'launchy'
@@ -20,7 +17,6 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'rubocop'
   gem 'phantomjs'
