@@ -1,17 +1,12 @@
 module Ponytail
   class Table
     include ActiveModel::Model
-    include ActiveModel::Dirty
-    attr_accessor :name, :columns, :indexes
+    include Dirty
+
     define_attribute_methods :name
     alias :id :name
 
     validates :name, presence: true
-
-    def name=(val)
-      name_will_change! unless val == @name
-      @name = val
-    end
 
     class << self
       def schema
@@ -32,12 +27,19 @@ module Ponytail
 
     def initialize(params)
       super(params)
-      @columns = params[:columns].map { |column| Column.from_colum(column) } if params[:columns]
-      @indexes = params[:indexes].map { |index| Index.from_index(index) } if params[:indexes]
+      @changed_attributes = {}
     end
 
-    def reset_changes!
-      @changed_attributes = {}
+    def columns
+      @columns ||= ActiveRecord::Base.connection.columns(name).map do |attrs|
+        Column.new attrs
+      end
+    end
+
+    def indexes
+      @indexes ||= ActiveRecord::Base.connection.indexes(name).map do |attrs|
+        Index.new attrs
+      end
     end
   end
 end

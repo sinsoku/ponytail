@@ -1,27 +1,16 @@
+require 'ponytail/dirty'
+
 module Ponytail
   class Column
     include ActiveModel::Model
-    include ActiveModel::Dirty
+    include Dirty
 
-    model_attributes = :type, :name, :sql_type, :null, :limit, :precision,
+    define_attribute_methods :type, :name, :sql_type, :null, :limit, :precision,
       :scale, :default, :default_function, :primary, :coder
-    define_attribute_methods(*model_attributes)
     alias :id :name
 
     validates :type, presence: true
     validates :name, presence: true
-
-    model_attributes.each do |m|
-      class_eval <<-EOS
-        def #{m}
-          @#{m}
-        end
-        def #{m}=(val)
-          #{m}_will_change! unless val == @#{m}
-          @#{m} = val
-        end
-      EOS
-    end
 
     class << self
       def from_colum(column)

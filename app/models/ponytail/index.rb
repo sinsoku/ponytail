@@ -1,27 +1,16 @@
+require 'ponytail/dirty'
+
 module Ponytail
   class Index
     include ActiveModel::Model
-    include ActiveModel::Dirty
+    include Dirty
 
-    model_attributes = :name, :columns, :unique, :lengths, :orders, :where,
-      :type, :using
-    define_attribute_methods(*model_attributes)
+    define_attribute_methods :name, :columns, :unique, :lengths, :orders,
+      :where, :type, :using
     alias :id :name
 
     validates :name, presence: true
     validates :columns, presence: true
-
-    model_attributes.each do |m|
-      class_eval <<-EOS
-        def #{m}
-          @#{m}
-        end
-        def #{m}=(val)
-          #{m}_will_change! unless val == @#{m}
-          @#{m} = val
-        end
-      EOS
-    end
 
     class << self
       def from_index(index)
