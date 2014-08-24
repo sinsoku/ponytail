@@ -9,19 +9,8 @@ module Ponytail
     validates :name, presence: true
 
     class << self
-      def schema
-        Ponytail::Schema.first
-      end
-
       def all
-        schema.tables.map do |t|
-          new(name: t[:name], columns: t[:columns], indexes: t[:indexes])
-        end
-      end
-
-      def find(id)
-        t = schema.tables.find { |x| x[:name] == id }
-        new(name: t[:name], columns: t[:columns], indexes: t[:indexes])
+        Schema.instance.table_names.map { |t| new name: t }
       end
     end
 
@@ -31,14 +20,16 @@ module Ponytail
     end
 
     def columns
-      @columns ||= ActiveRecord::Base.connection.columns(name).map do |attrs|
-        Column.new attrs
+      t = name_changed? ? name_was : name
+      @columns ||= ActiveRecord::Base.connection.columns(t).map do |attrs|
+        Column.new JSON.parse(attrs.to_json)
       end
     end
 
     def indexes
-      @indexes ||= ActiveRecord::Base.connection.indexes(name).map do |attrs|
-        Index.new attrs
+      t = name_changed? ? name_was : name
+      @indexes ||= ActiveRecord::Base.connection.indexes(t).map do |attrs|
+        Index.new attrs.to_h
       end
     end
   end

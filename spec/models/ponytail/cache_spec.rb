@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Ponytail
   describe Cache do
-    describe '.parse_json' do
+    describe '#initialize' do
       let(:session_cache) do
         {
           _ponytail: {
@@ -13,7 +13,7 @@ module Ponytail
           }
         }.to_json
       end
-      let(:cache) { Cache.parse_json session_cache }
+      let(:cache) { Cache.new session_cache }
       it { expect(cache.as_json).to include '_ponytail' => {'version' => 'v0.7.0'} }
       it { expect(cache.as_json).to include 'users' => {'name' => 'new_users'} }
     end

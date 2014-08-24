@@ -2,7 +2,7 @@ module Ponytail
   class Migration
     include ActiveModel::Model
     attr_accessor :name, :filename, :version, :raw_content, :status
-    alias :id :version
+    alias :id :name
 
     validates :name, presence: true
     validates :raw_content, presence: true
@@ -23,8 +23,8 @@ module Ponytail
         ActiveRecord::Migration.next_migration_number(last ? last.version + 1 : 0).to_i
       end
 
-      def find(id)
-        all.find { |x| x.version == id.to_i }
+      def find(version)
+        all.find { |x| x.version == version.to_i }
       end
 
       def load(migration)

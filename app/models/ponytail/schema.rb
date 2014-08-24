@@ -12,7 +12,7 @@ module Ponytail
     delegate :table_name, to: ActiveRecord::SchemaMigration
 
     class << self
-      def first
+      def instance
         @schema ||= new
       end
     end
@@ -25,16 +25,6 @@ module Ponytail
       get_all_versions.reverse.find { |x| x < current_version }
     end
 
-    def tables
-      table_names.sort.map do |t|
-        {
-          name: t,
-          columns: ActiveRecord::Base.connection.columns(t),
-          indexes: ActiveRecord::Base.connection.indexes(t)
-        }
-      end
-    end
-
     def update(attrs)
       if Ponytail.config.update_schema?
         @version = attrs["version"].to_i
@@ -44,7 +34,6 @@ module Ponytail
       end
     end
 
-    private
     def table_names
       ActiveRecord::Base.connection.tables.delete_if { |t| t == table_name }
     end

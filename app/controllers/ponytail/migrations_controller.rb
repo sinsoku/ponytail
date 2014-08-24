@@ -1,20 +1,21 @@
 module Ponytail
   class MigrationsController < ActionController::Base
     layout 'ponytail/application'
+    before_action :set_migration, only: :new
 
     def index
-      @schema = Schema.first
+      @schema = Schema.instance
       @migrations = Migration.all
     end
 
     def new
-      @migration = schema_change.to_migration
     end
 
     def create
       @migration = Migration.new(migraion_params)
 
       if @migration.save
+        session.delete :ponytail_cache
         redirect_to ponytail_migrations_url, notice: 'Migration was successfully created.'
       else
         render action: 'new'
@@ -32,8 +33,12 @@ module Ponytail
       params.require(:ponytail_migration).permit(:name, :raw_content)
     end
 
-    def schema_change
-      @schema_change ||= SchemaChange.load(session[:schema_change])
+    def set_migration
+      @migration ||= cache.to_migration
+    end
+
+    def cache
+      @cache ||= Cache.new session[:ponytail_cache]
     end
   end
 end

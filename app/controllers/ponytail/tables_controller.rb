@@ -1,14 +1,14 @@
 module Ponytail
   class TablesController < ActionController::Base
     layout 'ponytail/application'
-    before_action :set_table, only: :show
 
     def index
-      @tables = Table.all
+      @tables = cache.apply_tables Table.all
     end
 
     def show
-      @tables = Table.all
+      @tables = cache.apply_tables Table.all
+      @table = @tables.find { |t| t.name == params[:id] }
     end
 
     def update
@@ -18,17 +18,8 @@ module Ponytail
     end
 
     private
-    def set_table
-      @table = Table.find(params[:id])
-      # if schema_change.tables.key? params[:id]
-      #   @table ||= schema_change.tables[params[:id]]
-      # else
-      #   @table ||= Table.find(params[:id])
-      # end
-    end
-
-    def schema_change
-      @schema_change ||= SchemaChange.load(session[:schema_change])
+    def cache
+      @cache ||= Cache.new session[:ponytail_cache]
     end
   end
 end

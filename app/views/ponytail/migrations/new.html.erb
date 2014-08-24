@@ -16,16 +16,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :version %><br>
-    <%= f.text_field :version, readonly: true %>
-  </div>
-  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :filename %><br>
-    <%= f.text_field :filename, readonly: true %>
   </div>
   <pre>
     <code class="ruby"><%= @migration.raw_content %></code>
