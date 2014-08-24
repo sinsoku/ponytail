@@ -11,7 +11,7 @@ module Ponytail
     describe "#update" do
       context "valid params" do
         before do
-          Schema.any_instance.stub(update: true)
+          allow_any_instance_of(Schema).to receive(:update) { true }
           patch :update, ponytail_schema: schema_attributes
         end
         it { expect(response).to redirect_to(ponytail_migrations_url) }
@@ -20,7 +20,7 @@ module Ponytail
 
       context "invalid params" do
         before do
-          Schema.any_instance.stub(update: false)
+          allow_any_instance_of(Schema).to receive(:update) { false }
           patch :update, ponytail_schema: schema_attributes
         end
         it { expect(response).to redirect_to(ponytail_migrations_url) }

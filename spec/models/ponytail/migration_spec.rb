@@ -5,7 +5,7 @@ module Ponytail
     describe ".all" do
       before do
         proxy = Struct.new(:proxy, :name, :filename, :version)
-        ActiveRecord::Migrator.stub(migrations: [proxy.new('CreateUsers', '001_create_users', 1)])
+        allow(ActiveRecord::Migrator).to receive(:migrations) { [proxy.new('CreateUsers', '001_create_users', 1)] }
       end
       subject { Migration.all }
       it { expect(subject.first).to be_a_kind_of Migration }
@@ -14,8 +14,8 @@ module Ponytail
     describe ".next_version" do
       before do
         migration = Migration.new(version: 1)
-        Migration.stub(all: [migration])
-        ActiveRecord::Migration.should_receive(:next_migration_number)
+        allow(Migration).to receive(:all) { [migration] }
+        expect(ActiveRecord::Migration).to receive(:next_migration_number)
         Migration.next_version
       end
       it "" do end
@@ -31,7 +31,8 @@ module Ponytail
     describe "#save" do
       context "migration is valid" do
         before do
-          Migration.stub(migrations_path: 'db/migrate', next_version: '001')
+          allow(Migration).to receive(:migrations_path) { 'db/migrate' }
+          allow(Migration).to receive(:next_version) { '001' }
           @migration = Migration.new(name: 'CreateBooks')
           @migration.stub(valid?: true)
           @migration.stub_chain(:open, :write)
@@ -44,7 +45,7 @@ module Ponytail
       context "migration is invalid" do
         before do
           @migration = Migration.new(name: 'CreateBooks')
-          @migration.stub(valid?: false)
+          allow(@migration).to receive(:valid?) { false }
         end
         subject { @migration.save }
         # FIXME

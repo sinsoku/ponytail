@@ -22,7 +22,7 @@ module Ponytail
     describe "#create" do
       context "valid params" do
         before do
-          Migration.any_instance.stub(save: true)
+          allow_any_instance_of(Migration).to receive(:save) { true }
           post :create, ponytail_migration: migration_attributes
         end
         it { expect(response).to redirect_to ponytail_migrations_url }
@@ -30,7 +30,7 @@ module Ponytail
 
       context "invalid params" do
         before do
-          Migration.any_instance.stub(save: false)
+          allow_any_instance_of(Migration).to receive(:save) { false }
           post :create, ponytail_migration: migration_attributes
         end
         it { expect(response).to render_template :new }
@@ -39,8 +39,8 @@ module Ponytail
 
     describe "#destroy" do
       before do
-        Migration.stub(find: Migration.new)
-        Migration.any_instance.stub(:destroy)
+        allow(Migration).to receive(:find) { Migration.new }
+        allow_any_instance_of(Migration).to receive(:destroy)
         delete :destroy, id: "1"
       end
       it { expect(response).to redirect_to ponytail_migrations_url }
