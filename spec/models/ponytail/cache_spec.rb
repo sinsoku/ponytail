@@ -27,5 +27,23 @@ module Ponytail
         }.to change(table, :name).from('users').to('new_users')
       end
     end
+
+    describe '#raw_content' do
+      context 'create_table' do
+        let(:cache) { Cache.new '_new' => {'friends' => {'columns' => [{'name' => 'user_id', 'type' => 'integer'}]}} }
+        it { expect(cache.raw_content).to match /create_table :friends do |t|/ }
+        it { expect(cache.raw_content).to match /t.integer :user_id/ }
+      end
+
+      context 'rename_table' do
+        let(:cache) { Cache.new 'users' => {'name' => 'new_users'} }
+        it { expect(cache.raw_content).to match(/rename_table :users, :new_users/) }
+      end
+
+      context 'add_column' do
+        let(:cache) { Cache.new 'users' => {'_columns' => [{'name' => 'admin', 'type' => 'boolean'}]} }
+        it { expect(cache.raw_content).to match(/add_column :users, :admin, :boolean/) }
+      end
+    end
   end
 end
